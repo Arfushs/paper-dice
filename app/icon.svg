@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="13" fill="#100d0a" />
+  <g fill="none" stroke="#c9a227" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- d20 outer hexagon -->
+    <path d="M32 9 L52 20.5 L52 43.5 L32 55 L12 43.5 L12 20.5 Z" />
+    <!-- front face triangle -->
+    <path d="M32 22 L20 45 L44 45 Z" />
+    <!-- edges connecting the face to the outer points -->
+    <path d="M32 22 L32 9 M20 45 L12 43.5 M44 45 L52 43.5" opacity="0.9" />
+    <path d="M32 22 L52 20.5 M32 22 L12 20.5" opacity="0.55" />
+  </g>
+</svg>
