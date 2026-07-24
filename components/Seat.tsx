@@ -6,6 +6,7 @@ import { derive } from "@/data/character";
 import type { Participant } from "@/lib/session";
 import Art from "./Art";
 import ClassIcon from "./ClassIcon";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * A player's card in the party column: portrait, name, level, live HP and
@@ -21,6 +22,7 @@ export default function Seat({
   isYou: boolean;
   onOpen: () => void;
 }) {
+  const { tk, tl } = useLocale();
   const character = p.character;
   const cls = character ? CLASS_BY_ID.get(character.classId) : null;
   if (!character || !cls) return null;
@@ -35,8 +37,8 @@ export default function Seat({
   const artBase = sub ? `/images/subclasses/${sub.slug}` : `/images/classes/${cls.id}`;
   const weaponLabel = weapon
     ? weapon.die !== "—"
-      ? `${weapon.name.en.split(" (")[0]} ${weapon.die}`
-      : weapon.name.en
+      ? `${tl(weapon.name).split(" (")[0]} ${weapon.die}`
+      : tl(weapon.name)
     : "";
 
   return (
@@ -46,21 +48,21 @@ export default function Seat({
       onClick={onOpen}
     >
       <span className="pcard__art">
-        <Art base={artBase} iconId={cls.id} alt="" iconSize={30} />
-        {downed && <em className="pcard__downed">Downed</em>}
+        <Art base={artBase} iconId={cls.id} alt="" iconSize={46} />
+        {downed && <em className="pcard__downed">{tk("seat.downed")}</em>}
       </span>
 
       <span className="pcard__body">
         <span className="pcard__top">
           <strong className="pcard__name">
             {character.name || p.name}
-            {isYou && <i className="pcard__you">you</i>}
+            {isYou && <i className="pcard__you">{tk("seat.you")}</i>}
           </strong>
           <span className="pcard__lv">Lv {character.level}</span>
         </span>
         <span className="pcard__class">
           <ClassIcon id={cls.id} size={12} />
-          {sub ? `${sub.name.en} ${cls.name.en}` : cls.name.en}
+          {sub ? `${tl(sub.name)} ${tl(cls.name)}` : tl(cls.name)}
         </span>
 
         <span className="pcard__vital">

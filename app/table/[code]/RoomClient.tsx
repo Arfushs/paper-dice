@@ -33,11 +33,13 @@ import Art from "@/components/Art";
 import ClassIcon from "@/components/ClassIcon";
 import Seat from "@/components/Seat";
 import CharacterDrawer from "@/components/CharacterDrawer";
+import { useLocale } from "@/components/LocaleProvider";
 import ImageLibrary from "@/components/ImageLibrary";
 
 const QUICK_DICE = ["d4", "d6", "d8", "d10", "d12", "d20"];
 
 export default function RoomClient({ code }: { code: string }) {
+  const { tk, tl } = useLocale();
   const router = useRouter();
   const [clientId, setClientId] = useState("");
   const [room, setRoom] = useState<Room | null>(null);
@@ -281,7 +283,7 @@ export default function RoomClient({ code }: { code: string }) {
   }
 
   async function handleLeave() {
-    if (!window.confirm("Leave the table? Your seat will be given up.")) return;
+    if (!window.confirm(tk("room.leaveConfirm"))) return;
     if (me) await leaveRoom(me.id);
     forgetTable();
     router.push("/table");
@@ -289,12 +291,7 @@ export default function RoomClient({ code }: { code: string }) {
 
   async function handleTerminate() {
     if (!room) return;
-    if (
-      !window.confirm(
-        "Break up the table? The session ends for everyone and the dice log is lost. This cannot be undone.",
-      )
-    )
-      return;
+    if (!window.confirm(tk("room.terminateConfirm"))) return;
     try {
       await deleteRoom(room.id);
       forgetTable();
@@ -305,15 +302,15 @@ export default function RoomClient({ code }: { code: string }) {
   }
 
   // ── render ──
-  if (status === "loading") return <p className="table-status">Opening the table…</p>;
+  if (status === "loading") return <p className="table-status">{tk("room.opening")}</p>;
 
   if (status === "closed") {
     return (
       <div className="table-status">
-        <h2>The table has broken up</h2>
-        <p>The Story God ended the session.</p>
+        <h2>{tk("room.tableBrokeUp")}</h2>
+        <p>{tk("room.sgEnded")}</p>
         <Link href="/table" className="btn" style={{ marginTop: 18 }}>
-          Back to tables
+          {tk("room.backToTables")}
         </Link>
       </div>
     );
@@ -322,10 +319,10 @@ export default function RoomClient({ code }: { code: string }) {
   if (status === "missing") {
     return (
       <div className="table-status">
-        <h2>No table with the code {code}</h2>
+        <h2>{tk("room.noTableCode")} {code}</h2>
         <p>It may have been closed, or the code mistyped.</p>
         <Link href="/table" className="btn" style={{ marginTop: 18 }}>
-          Back to tables
+          {tk("room.backToTables")}
         </Link>
       </div>
     );
@@ -334,7 +331,7 @@ export default function RoomClient({ code }: { code: string }) {
   if (status === "error" || !room) {
     return (
       <div className="table-status">
-        <h2>Something went wrong</h2>
+        <h2>{tk("room.wentWrong")}</h2>
         <p>{error}</p>
       </div>
     );
@@ -349,12 +346,14 @@ export default function RoomClient({ code }: { code: string }) {
     return (
       <div className="table-status">
         <h2>{room.title}</h2>
-        <p style={{ marginBottom: 20 }}>Table {room.code} — pick a character to take a seat.</p>
+        <p style={{ marginBottom: 20 }}>
+          {room.code} — {tk("room.pickSeat")}
+        </p>
         {chars.length === 0 ? (
           <p>
-            You have no characters yet.{" "}
+            {tk("tables.noChars")}{" "}
             <Link href="/characters/new" className="inline-link">
-              Make one →
+              {tk("tables.makeOne")}
             </Link>
           </p>
         ) : (
@@ -368,7 +367,7 @@ export default function RoomClient({ code }: { code: string }) {
                   onClick={() => setJoinCharId(c.id)}
                 >
                   <ClassIcon id={c.classId} size={20} />
-                  <span>{c.name || "Unnamed"}</span>
+                  <span>{c.name || tk("chars.emptyTitle")}</span>
                 </button>
               ))}
             </div>
@@ -378,7 +377,7 @@ export default function RoomClient({ code }: { code: string }) {
               onClick={handleJoin}
               disabled={!joinCharId || joining}
             >
-              {joining ? "Joining…" : "Take a seat"}
+              {joining ? tk("tables.joining") : tk("tables.takeSeat")}
             </button>
           </>
         )}
@@ -400,9 +399,9 @@ export default function RoomClient({ code }: { code: string }) {
               {room.code}
             </span>
             <span className="dot">·</span>
-            {isSG ? "You are the Story God" : `Playing as ${me.name}`}
+            {isSG ? tk("room.youAreSG") : `${tk("room.playingAs")} ${me.name}`}
             <span className="dot">·</span>
-            {participants.length} at the table
+            {participants.length} {tk("room.atTable")}
           </p>
         </div>
         {isSG ? (
@@ -412,11 +411,11 @@ export default function RoomClient({ code }: { code: string }) {
             onClick={handleTerminate}
             style={{ flex: "none" }}
           >
-            Break up the table
+            {tk("room.terminate")}
           </button>
         ) : (
           <button type="button" className="mini-btn" onClick={handleLeave} style={{ flex: "none" }}>
-            Leave
+            {tk("room.leave")}
           </button>
         )}
       </header>
@@ -427,12 +426,12 @@ export default function RoomClient({ code }: { code: string }) {
         {/* ── Party, left ── */}
         <section className="party-col">
           <div className="section-label" style={{ margin: "0 0 12px" }}>
-            <h2>Party</h2>
+            <h2>{tk("room.party")}</h2>
             <span className="section-label__line" />
           </div>
           {players.length === 0 ? (
             <p className="field__note">
-              Nobody yet. Share the code <strong>{room.code}</strong>.
+              {tk("room.nobodyJoined")} <strong>{room.code}</strong>.
             </p>
           ) : (
             <div className="party-col__list">
@@ -452,8 +451,8 @@ export default function RoomClient({ code }: { code: string }) {
           {myCharacter && me && (
             <button type="button" className="own-btn" onClick={() => setOpenSeat(me.id)}>
               <ClassIcon id={myCharacter.classId} size={18} />
-              <span>Your sheet</span>
-              <em>health · level · gear</em>
+              <span>{tk("room.yourSheet")}</span>
+              <em>{tk("room.yourSheetSub")}</em>
             </button>
           )}
         </section>
@@ -472,13 +471,13 @@ export default function RoomClient({ code }: { code: string }) {
                   </div>
                   <div className="godpop__body">
                     <h4>{sg.name}</h4>
-                    <p>Narrates, sets difficulties, and rolls every die.</p>
+                    <p>{tk("seat.sgNarrates")}</p>
                   </div>
                 </div>
               </div>
               <div className="stage__god-text">
                 <strong>{sg.name}</strong>
-                <em>Story God</em>
+                <em>{tk("tables.storyGod")}</em>
               </div>
             </div>
           )}
@@ -499,16 +498,16 @@ export default function RoomClient({ code }: { code: string }) {
                 }}
               >
                 <span className="stage__glyph">{scene.glyph}</span>
-                <h2 className="stage__name">{scene.name.en}</h2>
+                <h2 className="stage__name">{tl(scene.name)}</h2>
               </div>
             ) : (
               <div className="stage__preset stage__preset--empty">
-                <h2 className="stage__name stage__name--empty">No scene set</h2>
+                <h2 className="stage__name stage__name--empty">{tk("room.noScene")}</h2>
               </div>
             )}
 
             {(room.scene_note || (!sceneImage && scene)) && (
-              <p className="stage__note">{room.scene_note || scene?.blurb.en}</p>
+              <p className="stage__note">{room.scene_note || (scene && tl(scene.blurb))}</p>
             )}
 
             {isSG && !sceneTab && (
@@ -518,14 +517,14 @@ export default function RoomClient({ code }: { code: string }) {
                   className="stage-btn"
                   onClick={() => setSceneTab("presets")}
                 >
-                  Scenes
+                  {tk("room.scenes")}
                 </button>
                 <button
                   type="button"
                   className="stage-btn"
                   onClick={() => setSceneTab("images")}
                 >
-                  Pictures
+                  {tk("room.pictures")}
                 </button>
               </div>
             )}
@@ -541,14 +540,14 @@ export default function RoomClient({ code }: { code: string }) {
                       className={`seg__opt${sceneTab === "presets" ? " seg__opt--on" : ""}`}
                       onClick={() => setSceneTab("presets")}
                     >
-                      Scenes
+                      {tk("room.scenes")}
                     </button>
                     <button
                       type="button"
                       className={`seg__opt${sceneTab === "images" ? " seg__opt--on" : ""}`}
                       onClick={() => setSceneTab("images")}
                     >
-                      Pictures
+                      {tk("room.pictures")}
                     </button>
                   </div>
                   <button
@@ -556,13 +555,13 @@ export default function RoomClient({ code }: { code: string }) {
                     className="stage-btn"
                     onClick={() => setSceneTab(null)}
                   >
-                    Done
+                    {tk("room.done")}
                   </button>
                 </div>
 
                 <input
                   className="text-input"
-                  placeholder="Say something about it (optional)"
+                  placeholder={tk("room.sceneNotePlaceholder")}
                   value={sceneNote}
                   maxLength={120}
                   onChange={(e) => setSceneNote(e.target.value)}
@@ -582,7 +581,7 @@ export default function RoomClient({ code }: { code: string }) {
                           onClick={() => showScene({ sceneId: s.id })}
                         >
                           <span className="scene-chip__glyph">{s.glyph}</span>
-                          <span className="scene-chip__name">{s.name.en}</span>
+                          <span className="scene-chip__name">{tl(s.name)}</span>
                         </button>
                       ))}
                     </div>
@@ -600,7 +599,7 @@ export default function RoomClient({ code }: { code: string }) {
                   className="stage-btn"
                   onClick={() => showScene({ sceneId: null, imageUrl: null })}
                 >
-                  Clear the scene
+                  {tk("room.clearScene")}
                 </button>
               </div>
             )}
@@ -610,13 +609,13 @@ export default function RoomClient({ code }: { code: string }) {
         {/* ── Dice ── */}
         <aside className="room__dice">
           <div className="section-label" style={{ margin: "0 0 14px" }}>
-            <h2>{isSG ? "Dice" : "Rolls"}</h2>
+            <h2>{isSG ? tk("room.dice") : tk("room.rolls")}</h2>
             <span className="section-label__line" />
           </div>
 
           {!isSG && (
             <p className="field__note" style={{ marginTop: 0 }}>
-              The Story God rolls for the table. Everything lands here.
+              {tk("room.sgRolls")}
             </p>
           )}
 
@@ -669,18 +668,18 @@ export default function RoomClient({ code }: { code: string }) {
                     checked={secret}
                     onChange={(e) => setSecret(e.target.checked)}
                   />
-                  <span>Secret</span>
+                  <span>{tk("room.secret")}</span>
                 </label>
               </div>
 
-              <p className="dice-group__label">Roll for</p>
+              <p className="dice-group__label">{tk("dice.rollFor")}</p>
               <div className="rollfor">
                 <button
                   type="button"
                   className={`rollfor__opt${rollFor === null ? " rollfor__opt--on" : ""}`}
                   onClick={() => setRollFor(null)}
                 >
-                  Nobody
+                  {tk("dice.nobody")}
                 </button>
                 {players.map((p) => (
                   <button
@@ -696,7 +695,7 @@ export default function RoomClient({ code }: { code: string }) {
 
               {subject ? (
                 <>
-                  <p className="dice-group__label">Ability check</p>
+                  <p className="dice-group__label">{tk("room.abilityCheck")}</p>
                   <div className="tray-abilities">
                     {ABILITIES.map((a) => (
                       <button
@@ -711,7 +710,7 @@ export default function RoomClient({ code }: { code: string }) {
                     ))}
                   </div>
 
-                  <p className="dice-group__label">Attack &amp; damage</p>
+                  <p className="dice-group__label">{tk("room.attackDamage")}</p>
                   <div className="tray-attack">
                     <button type="button" className="btn" onClick={() => attack("STR")}>
                       Atk STR
@@ -727,12 +726,10 @@ export default function RoomClient({ code }: { code: string }) {
                   </div>
                 </>
               ) : (
-                <p className="field__note">
-                  Rolling for nobody in particular — use the flat d20 for monsters and the world.
-                </p>
+                <p className="field__note">{tk("room.rollNobody")}</p>
               )}
 
-              <p className="dice-group__label">Flat roll</p>
+              <p className="dice-group__label">{tk("room.flatRoll")}</p>
               <div className="flat-roll">
                 <div className="stepper">
                   <button type="button" onClick={() => setFreeMod((m) => m - 1)}>
@@ -744,11 +741,11 @@ export default function RoomClient({ code }: { code: string }) {
                   </button>
                 </div>
                 <button type="button" className="btn" onClick={flatCheck}>
-                  Roll d20
+                  {tk("dice.rollD20")}
                 </button>
               </div>
 
-              <p className="dice-group__label">Custom</p>
+              <p className="dice-group__label">{tk("room.custom")}</p>
               <div className="tray-custom">
                 <input
                   className="text-input"
@@ -758,7 +755,7 @@ export default function RoomClient({ code }: { code: string }) {
                   onKeyDown={(e) => e.key === "Enter" && custom()}
                 />
                 <button type="button" className="btn" onClick={() => custom()}>
-                  Roll
+                  {tk("dice.roll")}
                 </button>
               </div>
               <div className="tray-quick">
@@ -773,7 +770,7 @@ export default function RoomClient({ code }: { code: string }) {
 
           <div className="room-log">
             {rolls.length === 0 ? (
-              <p className="field__note">No rolls yet.</p>
+              <p className="field__note">{tk("dice.noRolls")}</p>
             ) : (
               <ul className="log-list">
                 {rolls.map((r) => (
@@ -810,13 +807,16 @@ export default function RoomClient({ code }: { code: string }) {
 }
 
 function RoomRoll({ r, isSG, onReveal }: { r: Roll; isSG: boolean; onReveal: () => void }) {
+  const { tk } = useLocale();
   const p = r.payload;
 
   if (r.hidden && !isSG) {
     return (
       <li className="log-row log-row--hidden">
         <div className="log-row__top">
-          <span className="log-row__label">{r.actor_name} rolled in secret</span>
+          <span className="log-row__label">
+            {r.actor_name} {tk("room.rolledSecret")}
+          </span>
           <span className="log-row__total">?</span>
         </div>
       </li>
@@ -881,13 +881,13 @@ function RoomRoll({ r, isSG, onReveal }: { r: Roll; isSG: boolean; onReveal: () 
         )}
         {p.kind === "check" && p.outcome && (
           <span className={`log-badge log-badge--${p.outcome}`}>
-            {p.outcome === "success" ? "Success" : "Fail"}
+            {p.outcome === "success" ? tk("dice.success") : tk("dice.fail")}
             {p.difficulty != null ? ` vs ${p.difficulty}` : ""}
           </span>
         )}
         {r.hidden && isSG && (
           <button type="button" className="reveal-btn" onClick={onReveal}>
-            Reveal
+            {tk("room.reveal")}
           </button>
         )}
       </div>

@@ -17,6 +17,7 @@ import {
   type ArmorId,
 } from "@/data/rules-data";
 import { derive, type Character } from "@/data/character";
+import { useLocale } from "./LocaleProvider";
 
 type Tab = "vitals" | "level" | "abilities" | "gear";
 
@@ -47,6 +48,7 @@ export default function CharacterDrawer({
   onChange: (next: Character, hpDelta: number) => void;
   onAdjust: (patch: { hp_current?: number; energy_current?: number }) => void;
 }) {
+  const { tk, tl } = useLocale();
   const [tab, setTab] = useState<Tab>("vitals");
   const cls = CLASS_BY_ID.get(character.classId);
 
@@ -106,39 +108,39 @@ export default function CharacterDrawer({
       <aside className="drawer" role="dialog" aria-label="Your character">
         <header className="drawer__head">
           <div>
-            <h2 className="drawer__title">{character.name || "Your character"}</h2>
+            <h2 className="drawer__title">{character.name || tk("room.yourSheet")}</h2>
             <p className="drawer__sub">
-              {cls.name.en}
-              {sub && ` · ${sub.name.en}`} · Level {character.level}
+              {tl(cls.name)}
+              {sub && ` · ${tl(sub.name)}`} · {tk("common.level")} {character.level}
             </p>
           </div>
           <button type="button" className="mini-btn" onClick={onClose} style={{ flex: "none" }}>
-            Close
+            {tk("drawer.close")}
           </button>
         </header>
 
         <div className="drawer__derived">
           <span>
-            HP <strong>{d.hp}</strong>
+            {tk("stat.hp")} <strong>{d.hp}</strong>
           </span>
           <span>
-            Energy <strong>{d.energy}</strong>
+            {tk("stat.energy")} <strong>{d.energy}</strong>
           </span>
           <span>
-            Defense <strong>{d.defense}</strong>
+            {tk("stat.defense")} <strong>{d.defense}</strong>
           </span>
           <span>
-            Cap <strong>{d.effectCap}</strong>
+            {tk("stat.cap")} <strong>{d.effectCap}</strong>
           </span>
         </div>
 
         <nav className="drawer__tabs">
           {(
             [
-              ["vitals", "Health"],
-              ["level", "Level"],
-              ["abilities", `Abilities${pointsLeft > 0 ? ` · ${pointsLeft}` : ""}`],
-              ["gear", "Gear"],
+              ["vitals", tk("drawer.health")],
+              ["level", tk("creator.level")],
+              ["abilities", `${tk("creator.abilities")}${pointsLeft > 0 ? ` · ${pointsLeft}` : ""}`],
+              ["gear", tk("creator.gear")],
             ] as const
           ).map(([id, label]) => (
             <button
@@ -156,7 +158,7 @@ export default function CharacterDrawer({
           {tab === "vitals" && (
             <>
               <VitalRow
-                label="Hit Points"
+                label={tk("drawer.hitPoints")}
                 current={hp}
                 max={d.hp}
                 tone="hp"
@@ -167,7 +169,7 @@ export default function CharacterDrawer({
                 onFull={() => onAdjust({ hp_current: d.hp })}
               />
               <VitalRow
-                label="Energy"
+                label={tk("drawer.energy")}
                 current={energy}
                 max={d.energy}
                 tone="energy"
@@ -180,17 +182,14 @@ export default function CharacterDrawer({
 
               {hp <= 0 && (
                 <p className="drawer__downed">
-                  <strong>Downed.</strong> Roll a bare d20 on each of your turns — 10 or more is
-                  a success, 9 or less a failure. Three successes and you stabilise; three
-                  failures and you die.
+                  <strong>{tk("drawer.downedTag")}</strong> {tk("drawer.downed")}
                 </p>
               )}
 
               <div className="drawer__section">
-                <span className="field__label">Rest</span>
+                <span className="field__label">{tk("drawer.rest")}</span>
                 <p className="field__note" style={{ marginTop: 6 }}>
-                  A Short Rest restores {character.abilities.CON * 2} HP and half your Energy.
-                  A Long Rest restores everything.
+                  {tk("drawer.restNote", { con: character.abilities.CON * 2 })}
                 </p>
                 {canEdit && (
                   <div className="drawer__rests">
@@ -204,14 +203,14 @@ export default function CharacterDrawer({
                         })
                       }
                     >
-                      Short rest
+                      {tk("drawer.shortRest")}
                     </button>
                     <button
                       type="button"
                       className="btn btn--primary"
                       onClick={() => onAdjust({ hp_current: d.hp, energy_current: d.energy })}
                     >
-                      Long rest
+                      {tk("drawer.longRest")}
                     </button>
                   </div>
                 )}
@@ -222,7 +221,7 @@ export default function CharacterDrawer({
           {tab === "level" && (
             <>
               <div className="drawer__row">
-                <span className="field__label">Level</span>
+                <span className="field__label">{tk("creator.level")}</span>
                 <div className="stepper">
                   <button
                     type="button"
@@ -241,16 +240,13 @@ export default function CharacterDrawer({
                   </button>
                 </div>
               </div>
-              <p className="field__note">
-                No XP — the Story God says when. Every level adds 4 HP and 2 Energy; levels 4
-                and 8 add an ability point and a skill.
-              </p>
+              <p className="field__note">{tk("drawer.levelNote")}</p>
 
               <div className="drawer__section">
                 <span className="field__label">
-                  Subclass
+                  {tk("creator.subclass")}
                   {character.level < SUBCLASS_LEVEL && (
-                    <em className="field__hint"> — unlocks at level {SUBCLASS_LEVEL}</em>
+                    <em className="field__hint"> {tk("creator.subAt")} {SUBCLASS_LEVEL}</em>
                   )}
                 </span>
                 {character.level >= SUBCLASS_LEVEL ? (
@@ -260,7 +256,7 @@ export default function CharacterDrawer({
                       className={`seg__opt${!character.subclassId ? " seg__opt--on" : ""}`}
                       onClick={() => patch({ subclassId: null })}
                     >
-                      None
+                      {tk("creator.none")}
                     </button>
                     {cls.subclasses.map((s) => (
                       <button
@@ -269,24 +265,24 @@ export default function CharacterDrawer({
                         className={`seg__opt${character.subclassId === s.id ? " seg__opt--on" : ""}`}
                         onClick={() => patch({ subclassId: s.id })}
                       >
-                        {s.name.en}
+                        {tl(s.name)}
                       </button>
                     ))}
                   </div>
                 ) : (
-                  <p className="field__note">Keep playing.</p>
+                  <p className="field__note">{tk("drawer.keepPlaying")}</p>
                 )}
               </div>
 
               {sub && (
                 <div className="drawer__breaker">
-                  <span className="field__label">Rule Breaker</span>
-                  <strong>{sub.ruleBreaker.name.en}</strong>
-                  <p>{sub.ruleBreaker.text.en}</p>
+                  <span className="field__label">{tk("class.ruleBreaker")}</span>
+                  <strong>{tl(sub.ruleBreaker.name)}</strong>
+                  <p>{tl(sub.ruleBreaker.text)}</p>
                   <span className="field__label" style={{ marginTop: 12, display: "block" }}>
-                    Domain — Effects here cost −1 Energy
+                    {tk("class.domainDiscount")}
                   </span>
-                  <p>{sub.domain.en}</p>
+                  <p>{tl(sub.domain)}</p>
                 </div>
               )}
             </>
@@ -296,8 +292,8 @@ export default function CharacterDrawer({
             <>
               <p className="field__note" style={{ marginTop: 0 }}>
                 {pointsLeft > 0
-                  ? `${pointsLeft} point${pointsLeft === 1 ? "" : "s"} to spend. Nothing above ${cap}.`
-                  : `All spent. Cap is ${cap} at this level.`}
+                  ? tk("drawer.spendNote", { n: pointsLeft, s: "", cap })
+                  : tk("drawer.allSpent", { cap })}
               </p>
               <div className="drawer__abilities">
                 {ABILITIES.map((a) => (
@@ -305,9 +301,11 @@ export default function CharacterDrawer({
                     <div className="abil-row__meta">
                       <span className="abil-row__id">
                         {a.id}
-                        {a.id === character.primary && <em className="abil-row__pri">primary</em>}
+                        {a.id === character.primary && (
+                          <em className="abil-row__pri">{tk("creator.primaryTag")}</em>
+                        )}
                       </span>
-                      <span className="abil-row__name">{a.blurb.en}</span>
+                      <span className="abil-row__name">{tl(a.blurb)}</span>
                     </div>
                     <div className="stepper">
                       <button
@@ -332,9 +330,9 @@ export default function CharacterDrawer({
 
               <div className="drawer__section">
                 <span className="field__label">
-                  Trained skills{" "}
+                  {tk("drawer.trainedSkills")}{" "}
                   <em className="field__hint">
-                    — {skillsLeft > 0 ? `${skillsLeft} left` : "all chosen"}
+                    — {skillsLeft > 0 ? `${skillsLeft} ${tk("creator.left")}` : tk("drawer.allChosen")}
                   </em>
                 </span>
                 <div className="drawer__skills">
@@ -353,7 +351,7 @@ export default function CharacterDrawer({
                               onClick={() => toggleSkill(s.id)}
                               disabled={!on && skillsLeft <= 0}
                             >
-                              {s.name.en}
+                              {tl(s.name)}
                             </button>
                           );
                         })}
@@ -368,23 +366,23 @@ export default function CharacterDrawer({
           {tab === "gear" && (
             <>
               <label className="field">
-                <span className="field__label">Weapon or focus</span>
+                <span className="field__label">{tk("drawer.weaponOrFocus")}</span>
                 <select
                   className="text-input"
                   value={character.weaponId}
                   onChange={(e) => patch({ weaponId: e.target.value })}
                 >
-                  <optgroup label="Weapons">
+                  <optgroup label={tk("creator.weaponsGroup")}>
                     {WEAPONS.filter((w) => w.category === "weapon").map((w) => (
                       <option key={w.id} value={w.id}>
-                        {w.name.en} · {w.die}
+                        {tl(w.name)} · {w.die}
                       </option>
                     ))}
                   </optgroup>
-                  <optgroup label="Foci">
+                  <optgroup label={tk("creator.fociGroup")}>
                     {WEAPONS.filter((w) => w.category === "focus").map((w) => (
                       <option key={w.id} value={w.id}>
-                        {w.name.en}
+                        {tl(w.name)}
                         {w.die !== "—" ? ` · ${w.die}` : ""}
                       </option>
                     ))}
@@ -393,7 +391,7 @@ export default function CharacterDrawer({
               </label>
 
               <label className="field" style={{ marginTop: 14 }}>
-                <span className="field__label">Armor</span>
+                <span className="field__label">{tk("creator.armor")}</span>
                 <select
                   className="text-input"
                   value={character.armorId}
@@ -401,7 +399,7 @@ export default function CharacterDrawer({
                 >
                   {ARMORS.map((ar) => (
                     <option key={ar.id} value={ar.id}>
-                      {ar.name.en}
+                      {tl(ar.name)}
                     </option>
                   ))}
                 </select>
@@ -413,12 +411,13 @@ export default function CharacterDrawer({
                   checked={character.shield}
                   onChange={(e) => patch({ shield: e.target.checked })}
                 />
-                <span>Shield (+1 Defense)</span>
+                <span>{tk("creator.shield")}</span>
               </label>
 
               <label className="field" style={{ marginTop: 16 }}>
                 <span className="field__label">
-                  Inventory <em className="field__hint">— one item per line</em>
+                  {tk("creator.inventory")}{" "}
+                  <em className="field__hint">{tk("creator.inventoryHint")}</em>
                 </span>
                 <textarea
                   className="text-input text-area"
@@ -452,6 +451,7 @@ function VitalRow({
   onStep: (delta: number) => void;
   onFull: () => void;
 }) {
+  const { tk } = useLocale();
   const pct = Math.max(0, Math.min(100, (current / max) * 100));
   return (
     <div className="vital-block">
@@ -472,7 +472,7 @@ function VitalRow({
             </button>
           ))}
           <button type="button" className="vital-btn vital-btn--full" onClick={onFull}>
-            Full
+            {tk("drawer.full")}
           </button>
         </div>
       )}

@@ -28,8 +28,10 @@ import {
 } from "@/data/character";
 import ClassIcon from "@/components/ClassIcon";
 import CharacterCard from "@/components/CharacterCard";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function CreatorClient() {
+  const { tk, tl } = useLocale();
   const router = useRouter();
   const [editId, setEditId] = useState<string | null>(null);
   const [char, setChar] = useState<Character>(() => draftCharacter(CLASSES[0]));
@@ -110,11 +112,11 @@ export default function CreatorClient() {
     <div className="creator">
       <div className="creator__form">
         <Link href="/characters" className="backlink" style={{ padding: "0 0 20px" }}>
-          ← All characters
+          {tk("creator.back")}
         </Link>
 
         {/* ── Class ── */}
-        <Section n={1} title="Class">
+        <Section n={1} title={tk("creator.class")}>
           <div className="pick-grid">
             {CLASSES.map((c) => (
               <button
@@ -124,14 +126,14 @@ export default function CreatorClient() {
                 onClick={() => pickClass(c.id)}
               >
                 <ClassIcon id={c.id} size={22} />
-                <span>{c.name.en}</span>
+                <span>{tl(c.name)}</span>
               </button>
             ))}
           </div>
 
           <div className="field-row">
             <label className="field">
-              <span className="field__label">Level</span>
+              <span className="field__label">{tk("creator.level")}</span>
               <div className="stepper">
                 <button type="button" onClick={() => setLevel(char.level - 1)} aria-label="Lower level">
                   −
@@ -145,7 +147,7 @@ export default function CreatorClient() {
 
             {primarySlot.length > 1 && (
               <label className="field">
-                <span className="field__label">Primary ability</span>
+                <span className="field__label">{tk("creator.primary")}</span>
                 <div className="seg">
                   {primarySlot.map((a) => (
                     <button
@@ -164,9 +166,9 @@ export default function CreatorClient() {
 
           <div className="field" style={{ marginTop: 14 }}>
             <span className="field__label">
-              Subclass{" "}
+              {tk("creator.subclass")}{" "}
               {char.level < SUBCLASS_LEVEL && (
-                <em className="field__hint">— chosen at level {SUBCLASS_LEVEL}</em>
+                <em className="field__hint">{tk("creator.subAt")} {SUBCLASS_LEVEL}</em>
               )}
             </span>
             {subOptions.length > 0 ? (
@@ -176,7 +178,7 @@ export default function CreatorClient() {
                   className={`seg__opt${!char.subclassId ? " seg__opt--on" : ""}`}
                   onClick={() => patch({ subclassId: null })}
                 >
-                  None
+                  {tk("creator.none")}
                 </button>
                 {subOptions.map((s) => (
                   <button
@@ -185,25 +187,25 @@ export default function CreatorClient() {
                     className={`seg__opt${char.subclassId === s.id ? " seg__opt--on" : ""}`}
                     onClick={() => patch({ subclassId: s.id })}
                   >
-                    {s.name.en}
+                    {tl(s.name)}
                   </button>
                 ))}
               </div>
             ) : (
-              <p className="field__note">Raise to level {SUBCLASS_LEVEL} to choose one.</p>
+              <p className="field__note">{tk("creator.subUnlock")}</p>
             )}
           </div>
         </Section>
 
         {/* ── Identity ── */}
-        <Section n={2} title="Identity">
+        <Section n={2} title={tk("creator.identity")}>
           <label className="field">
-            <span className="field__label">Name</span>
+            <span className="field__label">{tk("creator.name")}</span>
             <input
               className="text-input"
               value={char.name}
               maxLength={40}
-              placeholder="Who are they?"
+              placeholder={tk("creator.namePlaceholder")}
               onChange={(e) => patch({ name: e.target.value })}
             />
           </label>
@@ -212,15 +214,17 @@ export default function CreatorClient() {
         {/* ── Abilities ── */}
         <Section
           n={3}
-          title="Abilities"
+          title={tk("creator.abilities")}
           aside={
             <span className={`budget${remaining === 0 ? " budget--done" : ""}`}>
-              {remaining} point{remaining === 1 ? "" : "s"} left
+              {remaining}{" "}
+              {remaining === 1 ? tk("creator.pointsLeft") : tk("creator.pointsLeftPlural")}{" "}
+              {tk("creator.left")}
             </span>
           }
         >
           <p className="field__note" style={{ marginTop: -4 }}>
-            Every ability starts at 1. Spend {pointsBudget(char.level)} points, none above {cap}.
+            {tk("creator.abilityNote", { points: pointsBudget(char.level), cap })}
           </p>
           <div className="abil-grid">
             {ABILITIES.map((a) => {
@@ -230,9 +234,11 @@ export default function CreatorClient() {
                   <div className="abil-row__meta">
                     <span className="abil-row__id">
                       {a.id}
-                      {a.id === char.primary && <em className="abil-row__pri">primary</em>}
+                      {a.id === char.primary && (
+                        <em className="abil-row__pri">{tk("creator.primaryTag")}</em>
+                      )}
                     </span>
-                    <span className="abil-row__name">{a.blurb.en}</span>
+                    <span className="abil-row__name">{tl(a.blurb)}</span>
                   </div>
                   <div className="stepper">
                     <button
@@ -262,10 +268,10 @@ export default function CreatorClient() {
         {/* ── Skills ── */}
         <Section
           n={4}
-          title="Trained Skills"
+          title={tk("creator.skills")}
           aside={
             <span className={`budget${skillsLeft === 0 ? " budget--done" : ""}`}>
-              {skillsLeft} left
+              {skillsLeft} {tk("creator.left")}
             </span>
           }
         >
@@ -285,7 +291,7 @@ export default function CreatorClient() {
                         onClick={() => toggleSkill(s.id)}
                         disabled={!on && skillsLeft <= 0}
                       >
-                        {s.name.en}
+                        {tl(s.name)}
                       </button>
                     );
                   })}
@@ -296,26 +302,26 @@ export default function CreatorClient() {
         </Section>
 
         {/* ── Gear ── */}
-        <Section n={5} title="Gear">
+        <Section n={5} title={tk("creator.gear")}>
           <div className="field-row">
             <label className="field">
-              <span className="field__label">Weapon</span>
+              <span className="field__label">{tk("creator.weapon")}</span>
               <select
                 className="text-input"
                 value={char.weaponId}
                 onChange={(e) => patch({ weaponId: e.target.value })}
               >
-                <optgroup label="Weapons">
+                <optgroup label={tk("creator.weaponsGroup")}>
                   {WEAPONS.filter((w) => w.category === "weapon").map((w) => (
                     <option key={w.id} value={w.id}>
-                      {w.name.en} · {w.die}
+                      {tl(w.name)} · {w.die}
                     </option>
                   ))}
                 </optgroup>
-                <optgroup label="Foci">
+                <optgroup label={tk("creator.fociGroup")}>
                   {WEAPONS.filter((w) => w.category === "focus").map((w) => (
                     <option key={w.id} value={w.id}>
-                      {w.name.en}
+                      {tl(w.name)}
                       {w.die !== "—" ? ` · ${w.die}` : ""}
                     </option>
                   ))}
@@ -324,7 +330,7 @@ export default function CreatorClient() {
             </label>
 
             <label className="field">
-              <span className="field__label">Armor</span>
+              <span className="field__label">{tk("creator.armor")}</span>
               <select
                 className="text-input"
                 value={char.armorId}
@@ -332,7 +338,7 @@ export default function CreatorClient() {
               >
                 {ARMORS.map((ar) => (
                   <option key={ar.id} value={ar.id}>
-                    {ar.name.en}
+                    {tl(ar.name)}
                   </option>
                 ))}
               </select>
@@ -344,34 +350,34 @@ export default function CreatorClient() {
                 checked={char.shield}
                 onChange={(e) => patch({ shield: e.target.checked })}
               />
-              <span>Shield (+1)</span>
+              <span>{tk("creator.shield")}</span>
             </label>
           </div>
 
           <label className="field" style={{ marginTop: 14 }}>
             <span className="field__label">
-              Inventory <em className="field__hint">— one item per line</em>
+              {tk("creator.inventory")} <em className="field__hint">{tk("creator.inventoryHint")}</em>
             </span>
             <textarea
               className="text-input text-area"
               rows={4}
               value={char.inventory.join("\n")}
-              placeholder={cls.kit.en}
+              placeholder={tl(cls.kit)}
               onChange={(e) => patch({ inventory: e.target.value.split("\n") })}
             />
           </label>
         </Section>
 
         {/* ── Background ── */}
-        <Section n={6} title="Background">
+        <Section n={6} title={tk("creator.background")}>
           <p className="field__note" style={{ marginTop: -4 }}>
-            The Story God will use all three against you.
+            {tk("creator.backgroundNote")}
           </p>
           {(
             [
-              ["from", "Where are you from?"],
-              ["owe", "Who do you owe?"],
-              ["want", "What do you want?"],
+              ["from", tk("creator.qFrom")],
+              ["owe", tk("creator.qOwe")],
+              ["want", tk("creator.qWant")],
             ] as const
           ).map(([key, label]) => (
             <label className="field" key={key}>
@@ -393,13 +399,13 @@ export default function CreatorClient() {
         <div className="creator__preview-inner">
           <CharacterCard character={char} />
           <button type="button" className="btn btn--primary creator__save" disabled={!canSave} onClick={save}>
-            {editId ? "Save changes" : "Create character"}
+            {editId ? tk("creator.saveEdit") : tk("creator.save")}
           </button>
           {!canSave && (
             <p className="creator__hint">
               {char.name.trim().length === 0
-                ? "Give them a name to finish."
-                : `Spend the last ${remaining} ability point${remaining === 1 ? "" : "s"}.`}
+                ? tk("creator.needName")
+                : tk("creator.spendPoints", { n: remaining, s: remaining === 1 ? "" : "" })}
             </p>
           )}
         </div>

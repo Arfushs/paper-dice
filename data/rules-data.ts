@@ -9,12 +9,12 @@ export interface Ability {
 }
 
 export const ABILITIES: Ability[] = [
-  { id: "STR", name: { en: "Strength", tr: "Güç" }, blurb: { en: "Melee power, lifting, forcing" } },
-  { id: "DEX", name: { en: "Dexterity", tr: "Çeviklik" }, blurb: { en: "Aim, reflexes, stealth, Defense" } },
-  { id: "CON", name: { en: "Constitution", tr: "Bünye" }, blurb: { en: "Health, stamina, resisting poison" } },
-  { id: "INT", name: { en: "Intelligence", tr: "Zekâ" }, blurb: { en: "Knowledge, deduction, arcane study" } },
-  { id: "WIS", name: { en: "Wisdom", tr: "Sağduyu" }, blurb: { en: "Awareness, intuition, willpower, faith" } },
-  { id: "CHA", name: { en: "Charisma", tr: "Karizma" }, blurb: { en: "Presence, persuasion, force of self" } },
+  { id: "STR", name: { en: "Strength", tr: "Güç" }, blurb: { en: "Melee power, lifting, forcing", tr: "Yakın dövüş gücü, kaldırma, zorlama" } },
+  { id: "DEX", name: { en: "Dexterity", tr: "Çeviklik" }, blurb: { en: "Aim, reflexes, stealth, Defense", tr: "Nişan, refleks, gizlilik, Savunma" } },
+  { id: "CON", name: { en: "Constitution", tr: "Bünye" }, blurb: { en: "Health, stamina, resisting poison", tr: "Sağlık, dayanıklılık, zehre direnç" } },
+  { id: "INT", name: { en: "Intelligence", tr: "Zekâ" }, blurb: { en: "Knowledge, deduction, arcane study", tr: "Bilgi, çıkarım, büyü çalışması" } },
+  { id: "WIS", name: { en: "Wisdom", tr: "Sağduyu" }, blurb: { en: "Awareness, intuition, willpower, faith", tr: "Farkındalık, sezgi, irade, inanç" } },
+  { id: "CHA", name: { en: "Charisma", tr: "Karizma" }, blurb: { en: "Presence, persuasion, force of self", tr: "Mevcudiyet, ikna, benlik gücü" } },
 ];
 
 export const ABILITY_IDS: AbilityId[] = ABILITIES.map((a) => a.id);
@@ -26,23 +26,23 @@ export interface Skill {
 }
 
 export const SKILLS: Skill[] = [
-  { id: "athletics", name: { en: "Athletics" }, ability: "STR" },
-  { id: "force", name: { en: "Force" }, ability: "STR" },
-  { id: "acrobatics", name: { en: "Acrobatics" }, ability: "DEX" },
-  { id: "stealth", name: { en: "Stealth" }, ability: "DEX" },
-  { id: "sleight", name: { en: "Sleight of Hand" }, ability: "DEX" },
-  { id: "endurance", name: { en: "Endurance" }, ability: "CON" },
-  { id: "lore", name: { en: "Lore" }, ability: "INT" },
-  { id: "investigation", name: { en: "Investigation" }, ability: "INT" },
-  { id: "craft", name: { en: "Craft" }, ability: "INT" },
-  { id: "perception", name: { en: "Perception" }, ability: "WIS" },
-  { id: "insight", name: { en: "Insight" }, ability: "WIS" },
-  { id: "survival", name: { en: "Survival" }, ability: "WIS" },
-  { id: "medicine", name: { en: "Medicine" }, ability: "WIS" },
-  { id: "persuasion", name: { en: "Persuasion" }, ability: "CHA" },
-  { id: "deception", name: { en: "Deception" }, ability: "CHA" },
-  { id: "intimidation", name: { en: "Intimidation" }, ability: "CHA" },
-  { id: "performance", name: { en: "Performance" }, ability: "CHA" },
+  { id: "athletics", name: { en: "Athletics", tr: "Atletizm" }, ability: "STR" },
+  { id: "force", name: { en: "Force", tr: "Kuvvet" }, ability: "STR" },
+  { id: "acrobatics", name: { en: "Acrobatics", tr: "Akrobasi" }, ability: "DEX" },
+  { id: "stealth", name: { en: "Stealth", tr: "Gizlilik" }, ability: "DEX" },
+  { id: "sleight", name: { en: "Sleight of Hand", tr: "El Çabukluğu" }, ability: "DEX" },
+  { id: "endurance", name: { en: "Endurance", tr: "Dayanıklılık" }, ability: "CON" },
+  { id: "lore", name: { en: "Lore", tr: "Bilgelik" }, ability: "INT" },
+  { id: "investigation", name: { en: "Investigation", tr: "Araştırma" }, ability: "INT" },
+  { id: "craft", name: { en: "Craft", tr: "Zanaat" }, ability: "INT" },
+  { id: "perception", name: { en: "Perception", tr: "Algı" }, ability: "WIS" },
+  { id: "insight", name: { en: "Insight", tr: "Sezgi" }, ability: "WIS" },
+  { id: "survival", name: { en: "Survival", tr: "Hayatta Kalma" }, ability: "WIS" },
+  { id: "medicine", name: { en: "Medicine", tr: "Tıp" }, ability: "WIS" },
+  { id: "persuasion", name: { en: "Persuasion", tr: "İkna" }, ability: "CHA" },
+  { id: "deception", name: { en: "Deception", tr: "Aldatma" }, ability: "CHA" },
+  { id: "intimidation", name: { en: "Intimidation", tr: "Gözdağı" }, ability: "CHA" },
+  { id: "performance", name: { en: "Performance", tr: "Gösteri" }, ability: "CHA" },
 ];
 
 export const SKILL_BY_ID = new Map(SKILLS.map((s) => [s.id, s]));
@@ -60,10 +60,10 @@ export interface Armor {
 }
 
 export const ARMORS: Armor[] = [
-  { id: "none", name: { en: "No armor" }, defenseBonus: 0 },
-  { id: "light", name: { en: "Light (leather)" }, defenseBonus: 1 },
-  { id: "medium", name: { en: "Medium (chain)" }, defenseBonus: 2, note: { en: "Disadvantage on Stealth" } },
-  { id: "heavy", name: { en: "Heavy (plate)" }, defenseBonus: 0, flatBase: 14, note: { en: "DEX does not apply; disadvantage on Stealth" } },
+  { id: "none", name: { en: "No armor", tr: "Zırhsız" }, defenseBonus: 0 },
+  { id: "light", name: { en: "Light (leather)", tr: "Hafif (deri)" }, defenseBonus: 1 },
+  { id: "medium", name: { en: "Medium (chain)", tr: "Orta (zincir)" }, defenseBonus: 2, note: { en: "Disadvantage on Stealth", tr: "Gizlilikte dezavantaj" } },
+  { id: "heavy", name: { en: "Heavy (plate)", tr: "Ağır (levha)" }, defenseBonus: 0, flatBase: 14, note: { en: "DEX does not apply; disadvantage on Stealth", tr: "DEX işlemez; Gizlilikte dezavantaj" } },
 ];
 
 export const ARMOR_BY_ID = new Map(ARMORS.map((a) => [a.id, a]));
@@ -79,24 +79,24 @@ export interface Weapon {
 
 export const WEAPONS: Weapon[] = [
   // ── Weapons ──
-  { id: "unarmed", name: { en: "Unarmed" }, die: "d4", category: "weapon" },
-  { id: "light", name: { en: "Light (dagger, club)" }, die: "d4", category: "weapon", note: { en: "Thrown to Near; dual-wield" } },
-  { id: "simple", name: { en: "Simple (sword, spear, axe)" }, die: "d6", category: "weapon" },
-  { id: "martial", name: { en: "Martial (longsword, warhammer)" }, die: "d8", category: "weapon", note: { en: "Requires STR 2+" } },
-  { id: "heavy", name: { en: "Heavy (greataxe, maul)" }, die: "d10", category: "weapon", note: { en: "Two-handed, STR 3+" } },
-  { id: "bow", name: { en: "Bow" }, die: "d6", category: "weapon", note: { en: "Reaches Far" } },
-  { id: "crossbow", name: { en: "Crossbow" }, die: "d8", category: "weapon", note: { en: "Reaches Far, costs Move to reload" } },
+  { id: "unarmed", name: { en: "Unarmed", tr: "Silahsız" }, die: "d4", category: "weapon" },
+  { id: "light", name: { en: "Light (dagger, club)", tr: "Hafif (hançer, sopa)" }, die: "d4", category: "weapon", note: { en: "Thrown to Near; dual-wield", tr: "Yakına fırlatılır; çift kullanım" } },
+  { id: "simple", name: { en: "Simple (sword, spear, axe)", tr: "Basit (kılıç, mızrak, balta)" }, die: "d6", category: "weapon" },
+  { id: "martial", name: { en: "Martial (longsword, warhammer)", tr: "Savaş (uzun kılıç, savaş çekici)" }, die: "d8", category: "weapon", note: { en: "Requires STR 2+", tr: "STR 2+ gerektirir" } },
+  { id: "heavy", name: { en: "Heavy (greataxe, maul)", tr: "Ağır (balta, gürz)" }, die: "d10", category: "weapon", note: { en: "Two-handed, STR 3+", tr: "İki elli, STR 3+" } },
+  { id: "bow", name: { en: "Bow", tr: "Yay" }, die: "d6", category: "weapon", note: { en: "Reaches Far", tr: "Uzağa erişir" } },
+  { id: "crossbow", name: { en: "Crossbow", tr: "Arbalet" }, die: "d8", category: "weapon", note: { en: "Reaches Far, costs Move to reload", tr: "Uzağa erişir, doldurmak Hareket alır" } },
 
   // ── Foci ── an implement channels Effects (d20 + Primary + Training); it is not
   // the source of the damage die, so most carry no die of their own.
-  { id: "staff", name: { en: "Staff" }, die: "d6", category: "focus", note: { en: "Also a simple melee weapon" } },
-  { id: "wand", name: { en: "Wand" }, die: "—", category: "focus", note: { en: "Arcane focus" } },
-  { id: "orb", name: { en: "Orb or crystal" }, die: "—", category: "focus", note: { en: "Arcane focus" } },
-  { id: "grimoire", name: { en: "Grimoire" }, die: "—", category: "focus", note: { en: "A wizard's spellbook focus" } },
-  { id: "holy-symbol", name: { en: "Holy symbol" }, die: "—", category: "focus", note: { en: "Divine focus" } },
-  { id: "totem", name: { en: "Totem" }, die: "—", category: "focus", note: { en: "Nature focus" } },
-  { id: "instrument", name: { en: "Instrument" }, die: "—", category: "focus", note: { en: "Bardic focus" } },
-  { id: "relic", name: { en: "Bone or iron relic" }, die: "—", category: "focus", note: { en: "A necromancer's focus" } },
+  { id: "staff", name: { en: "Staff", tr: "Asa" }, die: "d6", category: "focus", note: { en: "Also a simple melee weapon", tr: "Ayrıca basit bir yakın dövüş silahı" } },
+  { id: "wand", name: { en: "Wand", tr: "Değnek" }, die: "—", category: "focus", note: { en: "Arcane focus", tr: "Büyü odağı" } },
+  { id: "orb", name: { en: "Orb or crystal", tr: "Küre ya da kristal" }, die: "—", category: "focus", note: { en: "Arcane focus", tr: "Büyü odağı" } },
+  { id: "grimoire", name: { en: "Grimoire", tr: "Büyü Kitabı" }, die: "—", category: "focus", note: { en: "A wizard's spellbook focus", tr: "Bir büyücünün büyü kitabı odağı" } },
+  { id: "holy-symbol", name: { en: "Holy symbol", tr: "Kutsal sembol" }, die: "—", category: "focus", note: { en: "Divine focus", tr: "İlahi odak" } },
+  { id: "totem", name: { en: "Totem", tr: "Totem" }, die: "—", category: "focus", note: { en: "Nature focus", tr: "Doğa odağı" } },
+  { id: "instrument", name: { en: "Instrument", tr: "Çalgı" }, die: "—", category: "focus", note: { en: "Bardic focus", tr: "Ozan odağı" } },
+  { id: "relic", name: { en: "Bone or iron relic", tr: "Kemik ya da demir kalıntı" }, die: "—", category: "focus", note: { en: "A necromancer's focus", tr: "Bir nekromantın odağı" } },
 ];
 
 export const WEAPON_BY_ID = new Map(WEAPONS.map((w) => [w.id, w]));

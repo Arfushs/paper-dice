@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, EB_Garamond } from "next/font/google";
-import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
+import { LocaleProvider } from "@/components/LocaleProvider";
+import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import "./globals.css";
 
 const display = Cinzel({
@@ -53,39 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
       </head>
       <body>
-        <header className="site-header">
-          <div className="shell site-header__inner">
-            <Link href="/" className="wordmark">
-              Paper <span className="wordmark__amp">&amp;</span> Dice
-            </Link>
-            <nav className="site-nav">
-              <Link href="/classes" className="navlink">
-                Classes
-              </Link>
-              <Link href="/characters" className="navlink">
-                Characters
-              </Link>
-              <Link href="/play" className="navlink">
-                Dice
-              </Link>
-              <Link href="/table" className="navlink">
-                Tables
-              </Link>
-              <Link href="/rules" className="navlink">
-                Rules
-              </Link>
-              <ThemeToggle />
-            </nav>
-          </div>
-        </header>
-
-        <main>{children}</main>
-
-        <footer className="site-footer">
-          <div className="shell">
-            <p>Paper &amp; Dice — 14 classes · 51 subclasses · no spell list</p>
-          </div>
-        </footer>
+        <LocaleProvider>
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </LocaleProvider>
       </body>
     </html>
   );

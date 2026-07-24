@@ -18,32 +18,32 @@ export const STORY_GODS: StoryGodPortrait[] = [
   {
     id: "chronicler",
     name: { en: "The Chronicler", tr: "Vakanüvis" },
-    blurb: { en: "Writing it down as it happens. Nothing is forgotten." },
+    blurb: { en: "Writing it down as it happens. Nothing is forgotten.", tr: "Olurken yazıyor. Hiçbir şey unutulmaz." },
   },
   {
     id: "watcher",
     name: { en: "The Watcher", tr: "Gözleyen" },
-    blurb: { en: "Has been here the whole time. Says very little." },
+    blurb: { en: "Has been here the whole time. Says very little.", tr: "Baştan beri buradaydı. Pek az konuşur." },
   },
   {
     id: "weaver",
     name: { en: "The Weaver", tr: "Dokuyan" },
-    blurb: { en: "Holds every thread, and decides which ones cross." },
+    blurb: { en: "Holds every thread, and decides which ones cross.", tr: "Her ipliği tutar ve hangilerinin kesişeceğine karar verir." },
   },
   {
     id: "raven",
     name: { en: "The Raven", tr: "Karga" },
-    blurb: { en: "Arrives before the bad news does." },
+    blurb: { en: "Arrives before the bad news does.", tr: "Kötü haberden önce gelir." },
   },
   {
     id: "cartographer",
     name: { en: "The Cartographer", tr: "Haritacı" },
-    blurb: { en: "Knows what's past the edge of the map. Won't say yet." },
+    blurb: { en: "Knows what's past the edge of the map. Won't say yet.", tr: "Haritanın kenarının ötesinde ne olduğunu bilir. Henüz söylemez." },
   },
   {
     id: "arbiter",
     name: { en: "The Arbiter", tr: "Hakem" },
-    blurb: { en: "Weighs it, calls it, moves on." },
+    blurb: { en: "Weighs it, calls it, moves on.", tr: "Tartar, karar verir, devam eder." },
   },
 ];
 

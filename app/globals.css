@@ -188,6 +188,37 @@ body {
   border-color: var(--border-strong);
 }
 
+.locale-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 11px;
+  margin-left: 8px;
+  background: transparent;
+  border: var(--rule) solid var(--border);
+  border-radius: var(--radius);
+  color: var(--ink-faint);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.locale-toggle:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-hover);
+}
+
+.locale-toggle .on {
+  color: var(--accent);
+}
+
+.locale-toggle__sep {
+  color: var(--border-strong);
+}
+
 .theme-toggle {
   display: grid;
   place-items: center;
@@ -2536,7 +2567,7 @@ table.book tr:hover td {
    once — the Story God shouldn't have to scroll to run the game. */
 .room__grid {
   display: grid;
-  grid-template-columns: 292px minmax(0, 1fr) 320px;
+  grid-template-columns: 360px minmax(0, 1fr) 320px;
   gap: 18px;
   align-items: start;
   margin-top: 20px;
@@ -2544,7 +2575,7 @@ table.book tr:hover td {
 
 @media (max-width: 1480px) {
   .room__grid {
-    grid-template-columns: 262px minmax(0, 1fr) 292px;
+    grid-template-columns: 320px minmax(0, 1fr) 292px;
     gap: 14px;
   }
 }
@@ -2559,7 +2590,7 @@ table.book tr:hover td {
   }
   .party-col__list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     max-height: none;
   }
 }
@@ -2614,7 +2645,7 @@ table.book tr:hover td {
 .pcard__art {
   position: relative;
   flex: none;
-  width: 104px;
+  width: 140px;
   aspect-ratio: 1;
   align-self: center;
   margin: 10px 0 10px 10px;

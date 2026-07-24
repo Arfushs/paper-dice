@@ -1,49 +1,39 @@
+"use client";
+
 import Link from "next/link";
 import { CLASSES } from "@/data/classes";
 import ClassIcon from "@/components/ClassIcon";
-
-const PILLARS = [
-  {
-    title: "One roll for everything",
-    body: "d20 + your ability + training, against a number the Story God says out loud. Picking a lock, swinging a sword, talking a guard down — same roll every time.",
-  },
-  {
-    title: "No spell list",
-    body: "You describe what you want. The Story God prices it in Energy from a single table. A wizard's fireball and a knight's chandelier stunt go through the same door.",
-  },
-  {
-    title: "No battle map",
-    body: "Combat happens in four zones — Engaged, Near, Far, Distant. No grid, no counting squares, no measuring.",
-  },
-  {
-    title: "One resource",
-    body: "Energy. No spell slots, no per-day counters, no separate pools. A single number, spent and recovered.",
-  },
-];
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function Home() {
+  const { tk, tl } = useLocale();
+
+  const pillars = [
+    { t: tk("home.pillar1.t"), b: tk("home.pillar1.b") },
+    { t: tk("home.pillar2.t"), b: tk("home.pillar2.b") },
+    { t: tk("home.pillar3.t"), b: tk("home.pillar3.b") },
+    { t: tk("home.pillar4.t"), b: tk("home.pillar4.b") },
+  ];
+
   return (
     <div className="shell">
       <section className="hero">
-        <p className="eyebrow">A tabletop RPG for the web</p>
+        <p className="eyebrow">{tk("home.eyebrow")}</p>
         <h1 className="hero__title">
           Paper
           <em>&amp;</em>
           Dice
         </h1>
-        <p className="hero__sub">
-          Fourteen classes. Fifty-one subclasses. One Story God who rolls the dice,
-          sets the difficulty, and decides what it costs.
-        </p>
+        <p className="hero__sub">{tk("home.sub")}</p>
         <div className="hero__actions">
           <Link href="/characters/new" className="btn btn--primary">
-            Create a character
+            {tk("home.create")}
           </Link>
           <Link href="/classes" className="btn">
-            Browse the classes
+            {tk("home.browse")}
           </Link>
           <Link href="/rules" className="btn">
-            Read the rules
+            {tk("home.read")}
           </Link>
         </div>
       </section>
@@ -53,28 +43,25 @@ export default function Home() {
       </div>
 
       <section className="pillars">
-        {PILLARS.map((p) => (
-          <div className="pillar" key={p.title}>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
+        {pillars.map((p) => (
+          <div className="pillar" key={p.t}>
+            <h3>{p.t}</h3>
+            <p>{p.b}</p>
           </div>
         ))}
       </section>
 
       <div className="section-label">
-        <h2>The Roster</h2>
+        <h2>{tk("home.roster")}</h2>
         <span className="section-label__line" />
       </div>
-      <p className="section-note">
-        Every class is four things: how much punishment you take, where your points go,
-        what you may invent about, and the one trick that is yours alone.
-      </p>
+      <p className="section-note">{tk("home.rosterNote")}</p>
 
       <div className="roster-strip">
         {CLASSES.map((c) => (
-          <Link href={`/classes/${c.id}`} key={c.id} className="roster-chip" title={c.name.en}>
+          <Link href={`/classes/${c.id}`} key={c.id} className="roster-chip" title={tl(c.name)}>
             <ClassIcon id={c.id} size={26} />
-            <span>{c.name.en}</span>
+            <span>{tl(c.name)}</span>
           </Link>
         ))}
       </div>

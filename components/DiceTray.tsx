@@ -12,10 +12,12 @@ import {
   type RollMode,
   type RollResult,
 } from "@/lib/dice";
+import { useLocale } from "./LocaleProvider";
 
 const QUICK_DICE = ["d4", "d6", "d8", "d10", "d12", "d20", "d100"];
 
 export default function DiceTray() {
+  const { tk, tl } = useLocale();
   const [chars, setChars] = useState<Character[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mode, setMode] = useState<RollMode>("normal");
@@ -98,18 +100,26 @@ export default function DiceTray() {
     active && active.abilities.DEX > active.abilities.STR ? "DEX" : "STR";
 
   return (
-    <div className="tray">
+    <>
+      <p className="eyebrow">{tk("dice.eyebrow")}</p>
+      <h1 className="display" style={{ fontSize: "2.5rem", margin: "12px 0 6px" }}>
+        {tk("dice.title")}
+      </h1>
+      <p className="lede" style={{ maxWidth: "58ch", marginBottom: 8 }}>
+        {tk("dice.lede")}
+      </p>
+      <div className="tray">
       <div className="tray__panel">
         {/* Who's rolling */}
         <section className="tray-block">
           <div className="tray-block__head">
-            <h2>Who&rsquo;s rolling</h2>
+            <h2>{tk("dice.whoRolling")}</h2>
           </div>
           {chars.length === 0 ? (
             <p className="field__note" style={{ margin: 0 }}>
-              No saved characters. Rolls will use flat modifiers.{" "}
+              {tk("dice.whoRolling")}.{" "}
               <Link href="/characters/new" className="inline-link">
-                Create one →
+                {tk("chars.createFirst")} →
               </Link>
             </p>
           ) : (
@@ -119,7 +129,7 @@ export default function DiceTray() {
                 className={`pick${activeId === null ? " pick--on" : ""}`}
                 onClick={() => setActiveId(null)}
               >
-                <span>Freeform</span>
+                <span>{tk("dice.freeform")}</span>
               </button>
               {chars.map((c) => (
                 <button
@@ -128,7 +138,7 @@ export default function DiceTray() {
                   className={`pick${activeId === c.id ? " pick--on" : ""}`}
                   onClick={() => setActiveId(c.id)}
                 >
-                  <span>{c.name || "Unnamed"}</span>
+                  <span>{c.name || tk("chars.emptyTitle")}</span>
                 </button>
               ))}
             </div>
@@ -139,7 +149,7 @@ export default function DiceTray() {
         <section className="tray-block">
           <div className="tray-controls">
             <div className="tray-ctrl">
-              <span className="field__label">Roll</span>
+              <span className="field__label">{tk("dice.rollMode")}</span>
               <div className="seg">
                 {(["disadvantage", "normal", "advantage"] as RollMode[]).map((m) => (
                   <button
@@ -148,7 +158,11 @@ export default function DiceTray() {
                     className={`seg__opt${mode === m ? " seg__opt--on" : ""}`}
                     onClick={() => setMode(m)}
                   >
-                    {m === "normal" ? "Normal" : m === "advantage" ? "Advantage" : "Disadvantage"}
+                    {m === "normal"
+                      ? tk("dice.normal")
+                      : m === "advantage"
+                        ? tk("dice.advantage")
+                        : tk("dice.disadvantage")}
                   </button>
                 ))}
               </div>
@@ -156,18 +170,18 @@ export default function DiceTray() {
 
             <label className="field--check" style={{ alignSelf: "flex-end", paddingBottom: 4 }}>
               <input type="checkbox" checked={trained} onChange={(e) => setTrained(e.target.checked)} />
-              <span>Trained (+2)</span>
+              <span>{tk("dice.trained")}</span>
             </label>
 
             <div className="tray-ctrl">
-              <span className="field__label">Difficulty / Defense</span>
+              <span className="field__label">{tk("dice.difficulty")}</span>
               <div className="seg seg--wrap">
                 <button
                   type="button"
                   className={`seg__opt${difficulty === null ? " seg__opt--on" : ""}`}
                   onClick={() => setDifficulty(null)}
                 >
-                  None
+                  {tk("creator.none")}
                 </button>
                 {DIFFICULTIES.map((dv) => (
                   <button
@@ -188,8 +202,8 @@ export default function DiceTray() {
         {/* Ability checks */}
         <section className="tray-block">
           <div className="tray-block__head">
-            <h2>Ability check</h2>
-            <span className="tray-block__hint">d20 + ability{trained ? " + 2" : ""}</span>
+            <h2>{tk("dice.abilityCheck")}</h2>
+            <span className="tray-block__hint">d20 + {tk("creator.abilities").toLowerCase()}{trained ? " + 2" : ""}</span>
           </div>
           <div className="tray-abilities">
             {ABILITIES.map((a) => (
@@ -206,7 +220,7 @@ export default function DiceTray() {
           </div>
           {!active && (
             <div className="tray-freemod">
-              <span className="field__label">Flat modifier</span>
+              <span className="field__label">{tk("dice.flatMod")}</span>
               <div className="stepper">
                 <button type="button" onClick={() => setFreeMod((m) => m - 1)}>
                   −
@@ -217,7 +231,7 @@ export default function DiceTray() {
                 </button>
               </div>
               <button type="button" className="btn" onClick={freeformCheck}>
-                Roll d20
+                {tk("dice.rollD20")}
               </button>
             </div>
           )}
@@ -227,24 +241,24 @@ export default function DiceTray() {
         {active && (
           <section className="tray-block">
             <div className="tray-block__head">
-              <h2>Attack &amp; damage</h2>
+              <h2>{tk("dice.attackDamage")}</h2>
               {weapon && (
                 <span className="tray-block__hint">
-                  {weapon.name.en}
-                  {hasWeaponDie ? ` · ${weapon.die}` : " · focus"}
+                  {tl(weapon.name)}
+                  {hasWeaponDie ? ` · ${weapon.die}` : ` · ${tk("creator.focus").toLowerCase()}`}
                 </span>
               )}
             </div>
             <div className="tray-attack">
               <button type="button" className="btn" onClick={() => attack("STR")}>
-                Attack (STR {active.abilities.STR})
+                STR {active.abilities.STR}
               </button>
               <button type="button" className="btn" onClick={() => attack("DEX")}>
-                Attack (DEX {active.abilities.DEX})
+                DEX {active.abilities.DEX}
               </button>
               {hasWeaponDie && (
                 <button type="button" className="btn btn--primary" onClick={rollWeaponDamage}>
-                  Damage ({weapon!.die} + {suggestedAttackStat})
+                  {weapon!.die} + {suggestedAttackStat}
                 </button>
               )}
             </div>
@@ -254,18 +268,18 @@ export default function DiceTray() {
         {/* Custom dice */}
         <section className="tray-block">
           <div className="tray-block__head">
-            <h2>Custom</h2>
+            <h2>{tk("dice.custom")}</h2>
           </div>
           <div className="tray-custom">
             <input
               className="text-input"
-              placeholder="e.g. 2d6+3"
+              placeholder="2d6+3"
               value={expr}
               onChange={(e) => setExpr(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && rollCustom()}
             />
             <button type="button" className="btn" onClick={() => rollCustom()}>
-              Roll
+              {tk("dice.roll")}
             </button>
           </div>
           <div className="tray-quick">
@@ -281,15 +295,15 @@ export default function DiceTray() {
       {/* Log */}
       <aside className="tray__log">
         <div className="tray__log-head">
-          <h2>Rolls</h2>
+          <h2>{tk("dice.rolls")}</h2>
           {log.length > 0 && (
             <button type="button" className="mini-btn" onClick={() => setLog([])}>
-              Clear
+              {tk("dice.clear")}
             </button>
           )}
         </div>
         {log.length === 0 ? (
-          <p className="field__note">No rolls yet. Pick a character and throw some dice.</p>
+          <p className="field__note">{tk("dice.noRolls")}</p>
         ) : (
           <ul className="log-list">
             {log.map((r, i) => (
@@ -298,11 +312,13 @@ export default function DiceTray() {
           </ul>
         )}
       </aside>
-    </div>
+      </div>
+    </>
   );
 }
 
 function LogRow({ r }: { r: RollResult }) {
+  const { tk } = useLocale();
   if (r.kind === "check") {
     const critClass =
       r.crit === "success" ? " log-row--crit" : r.crit === "fail" ? " log-row--fumble" : "";
@@ -340,7 +356,7 @@ function LogRow({ r }: { r: RollResult }) {
           )}
           {r.outcome && (
             <span className={`log-badge log-badge--${r.outcome}`}>
-              {r.outcome === "success" ? "Success" : "Fail"}
+              {r.outcome === "success" ? tk("dice.success") : tk("dice.fail")}
               {r.difficulty != null ? ` vs ${r.difficulty}` : ""}
             </span>
           )}

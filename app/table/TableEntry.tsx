@@ -19,8 +19,10 @@ import type { SgImage } from "@/lib/images";
 import Art from "@/components/Art";
 import ClassIcon from "@/components/ClassIcon";
 import ImageLibrary from "@/components/ImageLibrary";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function TableEntry() {
+  const { tk, tl } = useLocale();
   const router = useRouter();
   const [chars, setChars] = useState<Character[]>([]);
   const [busy, setBusy] = useState<"create" | "join" | null>(null);
@@ -48,7 +50,7 @@ export default function TableEntry() {
   if (!isSupabaseConfigured) {
     return (
       <div className="setup-note">
-        <h2>Not connected yet</h2>
+        <h2>{tk("tables.notConnected")}</h2>
         <p>
           Live tables need Supabase. Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
           <code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code> to <code>.env.local</code> and
@@ -105,11 +107,19 @@ export default function TableEntry() {
 
   return (
     <>
+      <p className="eyebrow">{tk("tables.eyebrow")}</p>
+      <h1 className="display" style={{ fontSize: "2.5rem", margin: "12px 0 10px" }}>
+        {tk("tables.title")}
+      </h1>
+      <p className="lede" style={{ maxWidth: "58ch", marginBottom: 30 }}>
+        {tk("tables.lede")}
+      </p>
+
       {lastTable && (
         <Link href={`/table/${lastTable}`} className="resume-bar">
           <span className="resume-bar__code">{lastTable}</span>
-          <span>You still have a seat at this table</span>
-          <em>Return →</em>
+          <span>{tk("tables.resume")}</span>
+          <em>{tk("tables.return")}</em>
         </Link>
       )}
 
@@ -118,37 +128,34 @@ export default function TableEntry() {
       <div className="entry">
         {/* Story God */}
         <section className="entry-card">
-          <p className="eyebrow">Run it</p>
-          <h2 className="entry-card__title">Story God</h2>
-          <p className="entry-card__blurb">
-            Open a table, hand the code to your friends, and narrate. You roll every die and
-            decide what things cost. No character sheet — only authority.
-          </p>
+          <p className="eyebrow">{tk("tables.runIt")}</p>
+          <h2 className="entry-card__title">{tk("tables.storyGod")}</h2>
+          <p className="entry-card__blurb">{tk("tables.sgBlurb")}</p>
 
           <label className="field">
-            <span className="field__label">Your name</span>
+            <span className="field__label">{tk("tables.yourName")}</span>
             <input
               className="text-input"
               value={sgName}
               maxLength={30}
-              placeholder="Story God"
+              placeholder={tk("tables.storyGod")}
               onChange={(e) => setSgName(e.target.value)}
             />
           </label>
 
           <label className="field" style={{ marginTop: 12 }}>
-            <span className="field__label">What are you running?</span>
+            <span className="field__label">{tk("tables.running")}</span>
             <input
               className="text-input"
               value={title}
               maxLength={60}
-              placeholder="A new table"
+              placeholder={tk("tables.newTable")}
               onChange={(e) => setTitle(e.target.value)}
             />
           </label>
 
           <div className="field" style={{ marginTop: 16 }}>
-            <span className="field__label">Portrait</span>
+            <span className="field__label">{tk("tables.portrait")}</span>
             <div className="godpick">
               {STORY_GODS.map((g) => {
                 const src = storyGodArtBase(g.id);
@@ -163,7 +170,7 @@ export default function TableEntry() {
                       <span className="godpick__face">
                         <Art base={src} iconId="storygod" alt="" iconSize={26} />
                       </span>
-                      <span className="godpick__name">{g.name.en}</span>
+                      <span className="godpick__name">{tl(g.name)}</span>
                     </button>
 
                     <div className="godpop" role="tooltip">
@@ -171,8 +178,8 @@ export default function TableEntry() {
                         <Art base={src} iconId="storygod" alt="" iconSize={56} />
                       </div>
                       <div className="godpop__body">
-                        <h4>{g.name.en}</h4>
-                        <p>{g.blurb.en}</p>
+                        <h4>{tl(g.name)}</h4>
+                        <p>{tl(g.blurb)}</p>
                       </div>
                     </div>
                   </div>
@@ -195,7 +202,7 @@ export default function TableEntry() {
                       <span className="godpick__plus">+</span>
                     )}
                   </span>
-                  <span className="godpick__name">Your own</span>
+                  <span className="godpick__name">{tk("tables.yourOwn")}</span>
                 </button>
 
                 <div className="godpop" role="tooltip">
@@ -208,8 +215,8 @@ export default function TableEntry() {
                     )}
                   </div>
                   <div className="godpop__body">
-                    <h4>Your own</h4>
-                    <p>Use one of the pictures you&rsquo;ve uploaded.</p>
+                    <h4>{tk("tables.yourOwn")}</h4>
+                    <p>{tk("tables.backdropsNote")}</p>
                   </div>
                 </div>
               </div>
@@ -217,13 +224,12 @@ export default function TableEntry() {
           </div>
 
           <div className="field" style={{ marginTop: 16 }}>
-            <span className="field__label">Backdrops</span>
+            <span className="field__label">{tk("tables.backdrops")}</span>
             <p className="field__note" style={{ margin: "4px 0 8px" }}>
-              Upload them now — a burning hall, a map, a face — and show any of them in any
-              order once the table is open.
+              {tk("tables.backdropsNote")}
             </p>
             <button type="button" className="btn" onClick={() => setModal("backdrops")}>
-              Add pictures
+              {tk("tables.addPictures")}
             </button>
           </div>
 
@@ -233,21 +239,18 @@ export default function TableEntry() {
             onClick={handleCreate}
             disabled={busy !== null}
           >
-            {busy === "create" ? "Opening…" : "Open a table"}
+            {busy === "create" ? tk("tables.opening") : tk("tables.openTable")}
           </button>
         </section>
 
         {/* Player */}
         <section className="entry-card">
-          <p className="eyebrow">Play</p>
-          <h2 className="entry-card__title">Take a seat</h2>
-          <p className="entry-card__blurb">
-            Bring a character and join with the code the Story God gives you. You level up and
-            manage your gear at the table; the Story God handles the dice.
-          </p>
+          <p className="eyebrow">{tk("tables.play")}</p>
+          <h2 className="entry-card__title">{tk("tables.takeSeat")}</h2>
+          <p className="entry-card__blurb">{tk("tables.playerBlurb")}</p>
 
           <label className="field">
-            <span className="field__label">Table code</span>
+            <span className="field__label">{tk("tables.code")}</span>
             <input
               className="text-input code-input"
               value={code}
@@ -259,12 +262,12 @@ export default function TableEntry() {
           </label>
 
           <div className="field" style={{ marginTop: 14 }}>
-            <span className="field__label">Bring</span>
+            <span className="field__label">{tk("tables.bring")}</span>
             {chars.length === 0 ? (
               <p className="field__note" style={{ margin: "6px 0 0" }}>
-                No characters yet.{" "}
+                {tk("tables.noChars")}{" "}
                 <Link href="/characters/new" className="inline-link">
-                  Make one →
+                  {tk("tables.makeOne")}
                 </Link>
               </p>
             ) : (
@@ -277,7 +280,7 @@ export default function TableEntry() {
                     onClick={() => setCharId(c.id)}
                   >
                     <ClassIcon id={c.classId} size={20} />
-                    <span>{c.name || "Unnamed"}</span>
+                    <span>{c.name || tk("chars.emptyTitle")}</span>
                   </button>
                 ))}
               </div>
@@ -290,7 +293,7 @@ export default function TableEntry() {
             onClick={handleJoin}
             disabled={busy !== null || chars.length === 0}
           >
-            {busy === "join" ? "Joining…" : "Join the table"}
+            {busy === "join" ? tk("tables.joining") : tk("tables.joinTable")}
           </button>
         </section>
       </div>
@@ -302,12 +305,10 @@ export default function TableEntry() {
             <header className="drawer__head">
               <div>
                 <h2 className="drawer__title">
-                  {modal === "portrait" ? "Choose a portrait" : "Your backdrops"}
+                  {modal === "portrait" ? tk("tables.choosePortrait") : tk("tables.yourBackdrops")}
                 </h2>
                 <p className="drawer__sub">
-                  {modal === "portrait"
-                    ? "Any picture you've uploaded can be your face at the table."
-                    : "Show these mid-session, in any order. 4:3 fits best."}
+                  {modal === "portrait" ? tk("tables.sgBlurb") : tk("tables.backdropsNote")}
                 </p>
               </div>
               <button
@@ -316,13 +317,13 @@ export default function TableEntry() {
                 onClick={() => setModal(null)}
                 style={{ flex: "none" }}
               >
-                Close
+                {tk("drawer.close")}
               </button>
             </header>
             <div className="drawer__body">
               <ImageLibrary
                 activeUrl={modal === "portrait" ? avatar : null}
-                pickLabel="Use as portrait"
+                pickLabel={tk("tables.portrait")}
                 onPick={
                   modal === "portrait"
                     ? (img: SgImage) => {

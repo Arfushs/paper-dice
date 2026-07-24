@@ -9,6 +9,7 @@ import {
 } from "@/data/rules-data";
 import { derive, type Character } from "@/data/character";
 import Art from "./Art";
+import { useLocale } from "./LocaleProvider";
 
 /**
  * The character sheet as a card. Used in the creator preview and the roster —
@@ -21,6 +22,7 @@ export default function CharacterCard({
   character: Character;
   compact?: boolean;
 }) {
+  const { tk, tl } = useLocale();
   const cls = CLASS_BY_ID.get(character.classId);
   if (!cls) return null;
 
@@ -43,18 +45,18 @@ export default function CharacterCard({
       </div>
 
       <div className="pc-card__head">
-        <h3 className="pc-card__name">{character.name || "Unnamed"}</h3>
+        <h3 className="pc-card__name">{character.name || tk("chars.emptyTitle")}</h3>
         <p className="pc-card__class">
-          {cls.name.en}
-          {sub && <span className="pc-card__sub"> · {sub.name.en}</span>}
+          {tl(cls.name)}
+          {sub && <span className="pc-card__sub"> · {tl(sub.name)}</span>}
         </p>
       </div>
 
       <div className="pc-card__vitals">
-        <Vital label="HP" value={d.hp} accent />
-        <Vital label="Energy" value={d.energy} accent />
-        <Vital label="Defense" value={d.defense} />
-        <Vital label="Init" value={`+${d.initiative}`} />
+        <Vital label={tk("stat.hp")} value={d.hp} accent />
+        <Vital label={tk("stat.energy")} value={d.energy} accent />
+        <Vital label={tk("stat.defense")} value={d.defense} />
+        <Vital label={tk("stat.init")} value={`+${d.initiative}`} />
       </div>
 
       <div className="pc-card__abilities">
@@ -74,21 +76,23 @@ export default function CharacterCard({
 
       {!compact && (
         <>
-          <Row label="Domain" value={sub ? sub.domain.en : cls.domain.en} muted />
+          <Row label={tk("class.domain")} value={sub ? tl(sub.domain) : tl(cls.domain)} muted />
 
           <div className="pc-card__gear">
             <Row
-              label={weapon?.category === "focus" ? "Focus" : "Weapon"}
+              label={weapon?.category === "focus" ? tk("creator.focus") : tk("creator.weapon")}
               value={
                 weapon && weapon.die !== "—"
-                  ? `${weapon.name.en} (${weapon.die})`
-                  : (weapon?.name.en ?? character.weaponId)
+                  ? `${tl(weapon.name)} (${weapon.die})`
+                  : weapon
+                    ? tl(weapon.name)
+                    : character.weaponId
               }
             />
             <Row
-              label="Armor"
-              value={`${armor?.name.en ?? character.armorId}${
-                character.shield ? " + shield" : ""
+              label={tk("creator.armor")}
+              value={`${armor ? tl(armor.name) : character.armorId}${
+                character.shield ? ` + ${tk("creator.shieldShort")}` : ""
               }`}
             />
           </div>
@@ -97,7 +101,7 @@ export default function CharacterCard({
             <div className="pc-card__tags">
               {character.skills.map((id) => (
                 <span className="pc-tag" key={id}>
-                  {SKILL_BY_ID.get(id)?.name.en ?? id}
+                  {tl(SKILL_BY_ID.get(id)?.name) || id}
                 </span>
               ))}
             </div>
@@ -105,7 +109,7 @@ export default function CharacterCard({
 
           {character.inventory.filter(Boolean).length > 0 && (
             <div className="pc-card__inv">
-              <div className="pc-card__inv-label">Inventory</div>
+              <div className="pc-card__inv-label">{tk("creator.inventory")}</div>
               <ul>
                 {character.inventory.filter(Boolean).map((item, i) => (
                   <li key={i}>{item}</li>
