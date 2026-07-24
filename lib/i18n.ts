@@ -33,8 +33,8 @@ export const UI = {
   "home.read": { en: "Read the rules", tr: "Kuralları oku" },
   "home.roster": { en: "The Roster", tr: "Kadro" },
   "home.rosterNote": {
-    en: "Every class is four things: how much punishment you take, where your points go, what you may invent about, and the one trick that is yours alone.",
-    tr: "Her sınıf dört şeydir: ne kadar dayak yediğin, puanlarının nereye gittiği, neyi uydurabileceğin ve yalnızca sana ait olan o tek numara.",
+    en: "Every class comes down to four things: how much damage you can take, where your ability points go, what kinds of Effects you can invent, and the one signature trick only you have.",
+    tr: "Her sınıf dört şeye dayanır: ne kadar hasar alabildiğin, yetenek puanlarının nereye gittiği, ne tür Etkiler uydurabildiğin ve yalnızca sende olan o imza numara.",
   },
   "home.pillar1.t": { en: "One roll for everything", tr: "Her şey için tek zar" },
   "home.pillar1.b": {
@@ -43,8 +43,8 @@ export const UI = {
   },
   "home.pillar2.t": { en: "No spell list", tr: "Büyü listesi yok" },
   "home.pillar2.b": {
-    en: "You describe what you want. The Story God prices it in Energy from a single table. A wizard's fireball and a knight's chandelier stunt go through the same door.",
-    tr: "Ne istediğini anlatırsın. Hikâye Tanrısı tek bir tablodan Enerji cinsinden fiyatlandırır. Bir büyücünün ateş topu ile bir şövalyenin avize numarası aynı kapıdan geçer.",
+    en: "You describe what you want to do, and the Story God sets its Energy cost from one simple table. A wizard's fireball and a knight swinging from a chandelier follow the exact same rule.",
+    tr: "Ne yapmak istediğini anlatırsın, Hikâye Tanrısı da tek bir basit tablodan Enerji bedelini belirler. Bir büyücünün ateş topu da, bir şövalyenin avizeye tutunup savrulması da tıpatıp aynı kurala tabidir.",
   },
   "home.pillar3.t": { en: "No battle map", tr: "Savaş haritası yok" },
   "home.pillar3.b": {
@@ -61,8 +61,8 @@ export const UI = {
   "classes.eyebrow": { en: "Fourteen ways in", tr: "On dört giriş yolu" },
   "classes.title": { en: "Classes", tr: "Sınıflar" },
   "classes.lede": {
-    en: "Pick one at level 1. Its Domain decides what you can invent Effects about. At level 3 you choose a subclass — that narrows the Domain, makes it cheaper, and hands you one rule you are allowed to break.",
-    tr: "1. seviyede birini seç. Alanı, neyle ilgili Etki uydurabileceğini belirler. 3. seviyede bir alt sınıf seçersin — bu, Alanı daraltır, ucuzlatır ve sana çiğnemene izin verilen bir kural verir.",
+    en: "Pick one at level 1. Its Domain sets what kinds of Effects you can invent. At level 3 you pick a subclass: it narrows that Domain, makes those Effects cheaper, and gives you one special rule that only you get to break.",
+    tr: "1. seviyede bir sınıf seç. Sınıfın Alanı, ne tür Etkiler uydurabileceğini belirler. 3. seviyede bir alt sınıf seçersin: bu, Alanı daraltır, o Etkileri ucuzlatır ve sana yalnızca senin kırabildiğin özel bir kural verir.",
   },
 
   // class detail
@@ -127,7 +127,7 @@ export const UI = {
   "creator.none": { en: "None", tr: "Yok" },
   "creator.identity": { en: "Identity", tr: "Kimlik" },
   "creator.name": { en: "Name", tr: "İsim" },
-  "creator.namePlaceholder": { en: "Who are they?", tr: "Kimler bunlar?" },
+  "creator.namePlaceholder": { en: "Who are they?", tr: "Bu kim?" },
   "creator.abilities": { en: "Abilities", tr: "Yetenekler" },
   "creator.pointsLeft": { en: "point", tr: "puan" },
   "creator.pointsLeftPlural": { en: "points", tr: "puan" },
@@ -212,8 +212,8 @@ export const UI = {
   "tables.runIt": { en: "Run it", tr: "Yönet" },
   "tables.storyGod": { en: "Story God", tr: "Hikâye Tanrısı" },
   "tables.sgBlurb": {
-    en: "Open a table, hand the code to your friends, and narrate. You roll every die and decide what things cost. No character sheet — only authority.",
-    tr: "Bir masa aç, kodu arkadaşlarına ver ve anlat. Her zarı sen atarsın ve neyin ne kadara mal olduğuna karar verirsin. Karakter kâğıdı yok — yalnızca otorite.",
+    en: "Open a table, give the code to your friends, and narrate. You roll all the dice and decide what everything costs. You don't play a character — you run the game.",
+    tr: "Bir masa aç, kodu arkadaşlarına ver ve anlat. Bütün zarları sen atar, her şeyin bedeline sen karar verirsin. Karakter oynamazsın — oyunu sen yönetirsin.",
   },
   "tables.yourName": { en: "Your name", tr: "Adın" },
   "tables.running": { en: "What are you running?", tr: "Neyi yönetiyorsun?" },

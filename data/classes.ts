@@ -15,7 +15,7 @@ export const CLASSES: CharClass[] = [
       en: "You are not the strongest person in the room. You are the one who has done this before.", tr: "Odadaki en güçlü kişi sen değilsin. Sen bunu daha önce yapmış olansın.",
     },
     playsLike: {
-      en: "The dependable one. You have an answer to almost every fight and you never run out of it. Where the Barbarian breaks a problem and the Rogue avoids it, you take it apart on purpose. The easiest class to play well and the hardest to play badly — and the class whose subclasses change the most about how you actually play, from pure swordwork to inscribed magic to commanding a line.", tr: "Güvenilir olan. Neredeyse her dövüşe bir cevabın var ve asla tükenmiyor. Barbar bir sorunu kırarken, Hırsız ondan kaçarken, sen onu bilerek parçalara ayırırsın. İyi oynaması en kolay, kötü oynaması en zor sınıf — ve alt sınıfları oynayış tarzını en çok değiştiren sınıf: saf kılıç ustalığından kazınmış büyüye, bir hattı komuta etmeye kadar.",
+      en: "The dependable one. You have an answer to almost every fight and you never run out of it. Easy to play well, hard to play badly — and the class whose subclasses change your playstyle the most, from pure swordwork to inscribed magic to commanding a battle line.", tr: "Güvenilir olan. Neredeyse her dövüşe bir cevabın var ve asla tükenmezsin. İyi oynaması kolay, kötü oynaması zor — ve alt sınıfları oynayış tarzını en çok değiştiren sınıf: saf kılıç ustalığından kazınmış büyüye, bir savaş hattını komuta etmeye kadar.",
     },
     hpBase: 12,
     priority: ["STR / DEX", "CON", "WIS"],
@@ -129,7 +129,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Barbarian", tr: "Barbar" },
     hook: { en: "There is a point past which pain stops being information.", tr: "Acının artık bilgi olmaktan çıktığı bir eşik vardır." },
     playsLike: {
-      en: "A battery that discharges. You are enormous, you get bigger when you're angry, and you have very few answers that aren't violence. When the plan works you're a sledgehammer; when the plan fails you're the reason anyone survives.", tr: "Boşalan bir batarya. Devasasın, kızdığında büyürsün ve şiddet olmayan pek az cevabın var. Plan işlediğinde bir balyozsun; plan başarısız olduğunda birilerinin hayatta kalma sebebisin.",
+      en: "Huge, and bigger when you're angry. You don't have many answers that aren't violence — but when the plan works you're a wrecking ball, and when it fails you're the reason anyone gets out alive.", tr: "Kocamansın, kızınca daha da büyürsün. Şiddet dışında pek çözümün yok — ama plan tuttuğunda bir yıkım topusun, plan bozulduğunda da birilerinin sağ çıkma sebebi sensin.",
     },
     hpBase: 14,
     priority: ["STR", "CON", "WIS"],
@@ -227,7 +227,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Paladin", tr: "Paladin" },
     hook: { en: "You swore something. It is listening.", tr: "Bir şeye yemin ettin. O dinliyor." },
     playsLike: {
-      en: "A weapon with a conscience attached, and the conscience has teeth. You hit hard in bursts and you keep people standing. The oath is the real class feature: it gives the Story God a lever on you, and that is a feature — a Paladin with nothing to lose is just a Knight in nicer armor.", tr: "Vicdan eklenmiş bir silah, ve vicdanın dişleri var. Patlamalar hâlinde sert vurur ve insanları ayakta tutarsın. Asıl sınıf özelliği yemin: Hikâye Tanrısı'na üzerinde bir koz veriyor, ve bu bir özellik — kaybedecek hiçbir şeyi olmayan bir Paladin sadece daha güzel zırhlı bir Şövalyedir.",
+      en: "You hit hard in bursts and keep your allies standing. Your oath is the real class feature: it gives the Story God a hold on you, and that's the point — a Paladin with nothing to lose is just a Knight in fancier armor.", tr: "Patlamalar hâlinde sert vurur, müttefiklerini ayakta tutarsın. Asıl sınıf özelliğin yeminin: Hikâye Tanrısı'na senin üzerinde bir koz verir, ve olay da bu — kaybedecek şeyi olmayan bir Paladin, sadece daha süslü zırhlı bir Şövalyedir.",
     },
     hpBase: 12,
     priority: ["STR / CHA", "CON", "WIS"],
@@ -329,7 +329,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Monk", tr: "Keşiş" },
     hook: { en: "Everyone else brought a weapon. You didn't need to.", tr: "Herkes bir silah getirdi. Senin gerek yoktu." },
     playsLike: {
-      en: "Fast, slippery, precise. You go wherever you want on the battlefield and hit several times when you get there. Fragile if you stand still, so don't. The most mobile class in the game by a wide margin.", tr: "Hızlı, kaygan, hassas. Savaş alanında istediğin yere gidersin ve vardığında birkaç kez vurursun. Durursan kırılgansın, o yüzden durma. Oyundaki farkla en hareketli sınıf.",
+      en: "Fast, hard to pin down, precise. You go anywhere on the battlefield and hit several times when you arrive. Stand still and you're fragile, so don't. By far the most mobile class in the game.", tr: "Hızlı, yakalanması zor, hassas. Savaş alanında istediğin yere gider, vardığında birkaç kez vurursun. Durursan kırılgansın, o yüzden durma. Açık ara oyundaki en hareketli sınıf.",
     },
     hpBase: 10,
     priority: ["DEX", "WIS", "CON"],
@@ -426,7 +426,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Rogue", tr: "Hırsız" },
     hook: { en: "There is a way in. There is always a way in.", tr: "İçeri girmenin bir yolu var. Her zaman bir yolu vardır." },
     playsLike: {
-      en: "The highest single hit in the game if you set it up, and almost nothing if you don't. Outside combat you're the one who solves the problem before it becomes a fight. Rewards positioning and patience.", tr: "Kurarsan oyundaki en yüksek tek vuruş, kurmazsan neredeyse hiçbir şey. Savaş dışında sorunu dövüşe dönüşmeden çözen kişisin. Konumlanmayı ve sabrı ödüllendirir.",
+      en: "The biggest single hit in the game if you set it up — and almost nothing if you don't. Out of combat, you're the one who solves the problem before it becomes a fight. Rewards good positioning and patience.", tr: "Kurarsan oyundaki en yüksek tek vuruş, kuramazsan neredeyse hiçbir şey. Dövüş dışında, sorunu daha dövüşe dönüşmeden çözen kişisin. İyi konumlanmayı ve sabrı ödüllendirir.",
     },
     hpBase: 8,
     priority: ["DEX", "CHA / INT", "CON"],
@@ -508,7 +508,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Ranger", tr: "Korucu" },
     hook: { en: "You saw it three hours before it saw you.", tr: "Onu, o seni görmeden üç saat önce gördün." },
     playsLike: {
-      en: "Control and consistency. You pick the target and suddenly it's everyone's target. Away from the fight you keep the party alive, fed, and un-lost — the class that makes travel and wilderness actually play instead of being narrated past.", tr: "Kontrol ve tutarlılık. Hedefi sen seçersin ve birden herkesin hedefi olur. Dövüş dışında grubu hayatta, tok ve kaybolmamış tutarsın — yolculuğu ve yabanı geçilip anlatılmak yerine gerçekten oynatan sınıf.",
+      en: "Control and consistency. You pick a target and suddenly it's everyone's target. Away from the fight you keep the party alive, fed, and on course — the class that makes travel and the wilderness something you actually play through instead of skipping past.", tr: "Kontrol ve tutarlılık. Bir hedef seçersin ve o birden herkesin hedefi olur. Dövüş dışında grubu hayatta, tok ve yolda tutarsın — yolculuğu ve yabanı atlanacak bir şey olmaktan çıkarıp gerçekten oynatan sınıf.",
     },
     hpBase: 10,
     priority: ["DEX", "WIS", "CON"],
@@ -588,7 +588,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Bard", tr: "Ozan" },
     hook: { en: "Nobody in the room has noticed yet that you are the one deciding what happens.", tr: "Odada henüz kimse ne olacağına karar verenin sen olduğunu fark etmedi." },
     playsLike: {
-      en: "The amplifier. You rarely have the biggest number, but you hand out the die that turns someone else's failure into a success, and you talk the party out of half the fights they'd otherwise lose. The most social class, and unusually good at making everyone else feel powerful.", tr: "Yükseltici. Nadiren en büyük sayı sende olur, ama başkasının başarısızlığını başarıya çeviren zarı verirsin ve grubu, aksi hâlde kaybedecekleri dövüşlerin yarısından konuşarak çıkarırsın. En sosyal sınıf ve herkese kendini güçlü hissettirmekte alışılmadık derecede iyi.",
+      en: "You rarely have the biggest number, but you hand out the die that turns an ally's failure into a success, and you talk the party out of half the fights they'd otherwise lose. The most social class, and unusually good at making everyone else feel powerful.", tr: "En büyük sayı nadiren sende olur, ama bir müttefikin başarısızlığını başarıya çeviren zarı sen verirsin ve grubu, yoksa kaybedecekleri dövüşlerin yarısından konuşarak çıkarırsın. En sosyal sınıf ve herkese kendini güçlü hissettirmekte alışılmadık ölçüde iyi.",
     },
     hpBase: 8,
     priority: ["CHA", "DEX", "CON"],
@@ -669,7 +669,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Wizard", tr: "Büyücü" },
     hook: { en: "It took eleven years. You have notes.", tr: "On bir yıl sürdü. Notların var." },
     playsLike: {
-      en: "Preparation rewarded. Choose well at the start of the day and you're the most efficient caster at the table; get caught outside your preparation and you're a person in a robe. The most versatile class across a whole session, and the most punishing of laziness.", tr: "Hazırlığın ödülü. Günün başında iyi seç ve masadaki en verimli büyücü ol; hazırlığının dışında yakalan ve cübbeli bir insan ol. Bütün bir oturum boyunca en çok yönlü sınıf ve tembelliği en çok cezalandıran.",
+      en: "Preparation pays off. Prepare well at the start of the day and you're the most efficient caster at the table; get caught outside what you prepared and you're not much use. The most versatile class across a whole session, and the least forgiving of laziness.", tr: "Hazırlık iş görür. Günün başında iyi hazırlan, masadaki en verimli büyücü ol; hazırlığının dışında yakalan, pek işe yaramaz hâle gel. Bütün bir oturum boyunca en çok yönlü sınıf ve tembelliği en az affeden.",
     },
     hpBase: 6,
     priority: ["INT", "CON", "DEX"],
@@ -770,7 +770,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Sorcerer", tr: "Sihirbaz" },
     hook: { en: "You did not learn this. It was already in you and it has been waiting.", tr: "Bunu öğrenmedin. Zaten içindeydi ve bekliyordu." },
     playsLike: {
-      en: "Raw and flexible. Your Bend lets you reshape any Effect on the fly, so you improvise better than anyone. No book to lose, no patron to answer to — just a bloodline that occasionally has ideas of its own. The most elemental class, and the one where the subclass matters most.", tr: "Ham ve esnek. Bükme'n herhangi bir Etkiyi anında yeniden şekillendirmene izin verir, bu yüzden herkesten daha iyi doğaçlama yaparsın. Kaybedecek kitap yok, hesap verecek patron yok — sadece ara sıra kendi fikirleri olan bir soy. En elementsel sınıf ve alt sınıfın en çok önem taşıdığı sınıf.",
+      en: "Raw and flexible. Your Bend reshapes any Effect on the fly, so you improvise better than anyone. No book to lose, no patron to answer to — just power in your blood that sometimes acts up on its own. The most elemental class, and the one where your subclass matters most.", tr: "Ham ve esnek. Bükme'n herhangi bir Etkiyi anında yeniden şekillendirir, bu yüzden herkesten iyi doğaçlarsın. Kaybedecek kitap, hesap verecek patron yok — sadece kanındaki, ara sıra kendiliğinden taşan bir güç. En elementsel sınıf ve alt sınıfın en çok önem taşıdığı sınıf.",
     },
     hpBase: 6,
     priority: ["CON", "DEX", "CHA"],
@@ -888,7 +888,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Warlock", tr: "Pakt Büyücüsü" },
     hook: { en: "You didn't earn this and you didn't inherit it. You agreed to terms.", tr: "Bunu ne hak ettin ne de miras aldın. Şartları kabul ettin." },
     playsLike: {
-      en: "Burst and consequence. Your Energy comes back on a Short Rest, so where other casters ration, you spend everything and then rest. The trade is that something out there has a claim on you, and the Story God gets to use it. The darkest class in the game, and the one that generates the most story on its own.", tr: "Patlama ve sonuç. Enerjin Kısa Dinlenmede geri gelir, o yüzden diğer büyücüler idare ederken sen her şeyi harcar sonra dinlenirsin. Karşılığında dışarıda bir şeyin senin üzerinde hakkı vardır ve Hikâye Tanrısı onu kullanır. Oyundaki en karanlık sınıf ve kendi başına en çok hikâye üreten.",
+      en: "Burst and consequence. Your Energy comes back on a Short Rest, so while other casters ration theirs, you spend it all and then rest. The catch: something out there has a claim on you, and the Story God gets to use it. The darkest class in the game, and the one that generates the most story on its own.", tr: "Patlama ve sonuç. Enerjin Kısa Dinlenmede geri gelir, o yüzden diğer büyücüler idareli kullanırken sen hepsini harcar sonra dinlenirsin. Bedeli şu: dışarıda bir şeyin senin üzerinde hakkı vardır ve Hikâye Tanrısı bunu kullanabilir. Oyundaki en karanlık sınıf ve kendi başına en çok hikâye üreten.",
     },
     hpBase: 8,
     priority: ["WIS", "CON", "CHA"],
@@ -970,7 +970,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Necromancer", tr: "Ölüm Büyücüsü" },
     hook: { en: "Death is not a wall. It is a door with a specific and knowable mechanism.", tr: "Ölüm bir duvar değil. Belirli ve bilinebilir bir mekanizması olan bir kapı." },
     playsLike: {
-      en: "A resource engine. Every corpse on the field is fuel, so the longer a fight runs the stronger you get. You're a caster who wants the body count. Socially you're a liability in most towns, which is part of the fun.", tr: "Bir kaynak motoru. Sahadaki her ceset yakıttır, o yüzden dövüş uzadıkça güçlenirsin. Ceset sayısını isteyen bir büyücüsün. Sosyal olarak çoğu kasabada bir yüksün, ve eğlencenin bir kısmı da bu.",
+      en: "A resource engine. Every corpse on the field is fuel, so the longer a fight runs, the stronger you get — a caster who wants a high body count. In most towns you're a problem to have around, which is half the fun.", tr: "Bir kaynak motoru. Sahadaki her ceset yakıttır, o yüzden dövüş uzadıkça güçlenirsin — yüksek ceset sayısını isteyen bir büyücü. Çoğu kasabada başa bela birisin, ve eğlencenin yarısı da bu.",
     },
     hpBase: 8,
     priority: ["INT", "CON", "CHA"],
@@ -1073,7 +1073,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Cleric", tr: "Rahip" },
     hook: { en: "You are not asking. You are relaying.", tr: "Rica etmiyorsun. Aktarıyorsun." },
     playsLike: {
-      en: "The safety net with teeth. You keep people alive, you cancel the thing that was about to ruin the encounter, and once a session you get to ask the universe for a favour it cannot refuse. Steady rather than flashy — until the Miracle, which is the single most open-ended ability in the game.", tr: "Dişli emniyet ağı. İnsanları hayatta tutarsın, karşılaşmayı mahvetmek üzere olan şeyi iptal edersin ve oturumda bir kez evrenden reddedemeyeceği bir lütuf isteyebilirsin. Gösterişten çok istikrarlı — Mucize'ye kadar, ki o oyundaki tek en uçları açık yetenektir.",
+      en: "You keep people alive, you shut down the thing that was about to ruin the fight, and once a session you get to ask the universe for a favour it cannot refuse. Steady rather than flashy — until the Miracle, the single most open-ended ability in the game.", tr: "İnsanları hayatta tutar, dövüşü mahvetmek üzere olan şeyi durdurur ve oturumda bir kez evrenden reddedemeyeceği bir lütuf isteyebilirsin. Gösterişli değil, istikrarlısın — ta ki Mucize'ye kadar, ki o oyundaki uçları en açık yetenek.",
     },
     hpBase: 10,
     priority: ["WIS", "CON", "STR / CHA"],
@@ -1153,7 +1153,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Shaman", tr: "Şaman" },
     hook: { en: "The world is not scenery. It is a crowd, and you are the only one being polite.", tr: "Dünya bir dekor değil. Bir kalabalık, ve nazik olan tek kişi sensin." },
     playsLike: {
-      en: "The most flexible non-combat class in the game and a strong controller in a fight. You change shape, you change ground, you change weather. Where the Wizard prepares and the Sorcerer improvises, you negotiate — with animals, plants, spirits, and the terrain itself.", tr: "Oyundaki en esnek dövüş-dışı sınıf ve bir dövüşte güçlü bir kontrolcü. Şekil değiştirirsin, zemini değiştirirsin, havayı değiştirirsin. Büyücü hazırlanırken ve Sihirbaz doğaçlarken, sen müzakere edersin — hayvanlarla, bitkilerle, ruhlarla ve arazinin kendisiyle.",
+      en: "The most flexible class out of combat, and a strong controller in a fight. You change shape, you change the ground, you change the weather. Where the Wizard prepares and the Sorcerer improvises, you negotiate — with animals, plants, spirits, and the terrain itself.", tr: "Dövüş dışında en esnek sınıf, dövüşte ise güçlü bir kontrolcü. Şekil değiştirir, zemini değiştirir, havayı değiştirirsin. Büyücü hazırlanır, Sihirbaz doğaçlar; sen ise müzakere edersin — hayvanlarla, bitkilerle, ruhlarla ve arazinin kendisiyle.",
     },
     hpBase: 10,
     priority: ["WIS", "CON", "DEX"],
@@ -1234,7 +1234,7 @@ export const CLASSES: CharClass[] = [
     name: { en: "Alchemist", tr: "Simyacı" },
     hook: { en: "Magic is chemistry that hasn't been written down properly yet.", tr: "Büyü, henüz düzgünce yazıya dökülmemiş kimyadır." },
     playsLike: {
-      en: "A planner. You bank your power at rest and spend it as physical objects, which means you can hand your abilities to other people. The only class that can arm the whole party. Weak at improvising, extremely strong at preparing.", tr: "Bir planlamacı. Gücünü dinlenirken biriktirir ve fiziksel nesneler olarak harcarsın, bu da yeteneklerini başkalarına verebileceğin anlamına gelir. Bütün grubu donatabilen tek sınıf. Doğaçlamada zayıf, hazırlıkta son derece güçlü.",
+      en: "A planner. You bank your power at rest and spend it as physical objects — which means you can hand your abilities to other people. The only class that can arm the whole party. Weak at improvising, extremely strong at preparing.", tr: "Bir planlamacı. Gücünü dinlenirken biriktirir, fiziksel nesneler olarak harcarsın — yani yeteneklerini başkalarına verebilirsin. Bütün grubu donatabilen tek sınıf. Doğaçlamada zayıf, hazırlıkta son derece güçlü.",
     },
     hpBase: 8,
     priority: ["INT", "DEX", "CON"],
