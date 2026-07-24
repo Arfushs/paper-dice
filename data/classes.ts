@@ -58,7 +58,7 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "The protector. You hold a doorway or line so enemies can't reach your weaker friends. Pick this if you want to keep the party safe.", tr: "Koruyucu. Bir kapıyı ya da hattı tutarsın, düşmanlar zayıf arkadaşlarına ulaşamaz. Grubu güvende tutmak istiyorsan seç." },
         domain: { en: "Shields, chokepoints, cover, and ground you refuse to give.", tr: "Kalkanlar, dar geçitler, siper ve vermeyi reddettiğin topraklar." },
         ruleBreaker: {
-          name: { en: "Bulwark", tr: "Sur" },
+          name: { en: "Hold the Line", tr: "Hattı Tut" },
           text: { en: "Enemies cannot leave your zone unless they beat you in a STR or DEX contest.", tr: "Düşmanlar, seni bir STR ya da DEX yarışmasında yenmedikçe bölgeni terk edemez." },
         },
         examples: [
@@ -206,9 +206,9 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A barbarian whose fury becomes shockwaves and force. Pick this if you want a rager who also has ranged, magic-like hits.", tr: "Öfkesi şok dalgalarına ve kuvvete dönüşen bir barbar. Menzilli, büyü benzeri vuruşları da olan bir öfkeci isteyenler seçsin." },
         domain: { en: "Fury made physical — force, shockwaves, and the air getting out of the way.", tr: "Fizikselleşmiş öfke — kuvvet, şok dalgaları ve yoldan çekilen hava." },
         ruleBreaker: {
-          name: { en: "It Comes Out", tr: "Dışarı Taşar" },
+          name: { en: "Overflow", tr: "Taşkın" },
           text: {
-            en: "While you are Raging, your Effects cost no Action. The rage is producing them, not you — you are just where they happen.", tr: "Öfkedeyken Etkilerin Aksiyon harcamaz. Onları öfke üretiyor, sen değil — sen sadece gerçekleştikleri yersin.",
+            en: "While you are Raging, your Effects cost no Action.", tr: "Öfkedeyken Etkilerin Aksiyon harcamaz.",
           },
         },
         examples: [
@@ -404,7 +404,7 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A healing monk who mends bodies by touch. Pick this if you want a front-line fighter who also patches the party up.", tr: "Dokunarak bedenleri onaran bir keşiş. Grubu ayakta tutan ama ön safta da dövüşen biri isteyenler seçsin." },
         domain: { en: "Breath, circulation, nerves, poison, and putting a body back the way it was.", tr: "Nefes, dolaşım, sinirler, zehir ve bir bedeni eski hâline döndürmek." },
         ruleBreaker: {
-          name: { en: "Hands On", tr: "Eller Üzerinde" },
+          name: { en: "Healing Touch", tr: "Şifalı Dokunuş" },
           text: {
             en: "Your healing Effects cost no Action and need no roll — but you must be Engaged and touching them. You cannot heal at range at all.", tr: "İyileştirme Etkilerin Aksiyon harcamaz ve atış gerektirmez — ama Temas hâlinde ve onlara dokunuyor olmalısın. Menzilden hiç iyileştiremezsin.",
           },
@@ -615,7 +615,7 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A social master of courts, rumours, and reputation. Pick this to win through talking, negotiation, and influence.", tr: "Sarayların, söylentilerin ve itibarın sosyal ustası. Konuşarak, müzakereyle ve nüfuzla kazanmak için seç." },
         domain: { en: "Persuasion, courts, rumour, negotiation, reputation.", tr: "İkna, saraylar, söylenti, müzakere, itibar." },
         ruleBreaker: {
-          name: { en: "Word Ahead", tr: "Önden Söz" },
+          name: { en: "Reputation", tr: "İtibar" },
           text: { en: "When you arrive somewhere new, you decide what they have already heard about you.", tr: "Yeni bir yere vardığında, hakkında önceden ne duyduklarına sen karar verirsin." },
         },
         examples: [
@@ -869,7 +869,7 @@ export const CLASSES: CharClass[] = [
         ruleBreaker: {
           name: { en: "Before Names", tr: "İsimlerden Önce" },
           text: {
-            en: "Once per scene, produce an Effect outside your Class Domain at normal cost and with no disadvantage. It was all one thing, once.", tr: "Sahne başına bir kez, Sınıf Alanının dışında bir Etkiyi normal maliyetle ve dezavantajsız üret. Bir zamanlar hepsi tek bir şeydi.",
+            en: "Once per scene, produce an Effect outside your Class Domain at normal cost and with no disadvantage.", tr: "Sahne başına bir kez, Sınıf Alanının dışında bir Etkiyi normal maliyetle ve dezavantajsız üret.",
           },
         },
         examples: [
@@ -920,7 +920,7 @@ export const CLASSES: CharClass[] = [
         domain: { en: "Hellfire, contracts, temptation, and curses that stick.", tr: "Cehennem ateşi, sözleşmeler, ayartma ve yapışan lanetler." },
         ruleBreaker: {
           name: { en: "Blood Price", tr: "Kan Bedeli" },
-          text: { en: "Pay any Energy cost with HP instead, at 2 HP per Energy. Your Patron finds this funny.", tr: "Herhangi bir Enerji maliyetini yerine Canla öde, Enerji başına 2 Can. Patronun bunu komik buluyor." },
+          text: { en: "Pay any Energy cost with HP instead, at 2 HP per Energy.", tr: "Herhangi bir Enerji bedelini Canla öde, Enerji başına 2 Can." },
         },
         examples: [
           { text: { en: "Offer a tempting deal that hides a catch.", tr: "İçinde bir tuzak saklayan cazip bir anlaşma sun." }, cost: "1" },
@@ -997,7 +997,7 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A necromancer with a permanent skeleton servant. Pick this if you want a reliable pet that fights every turn.", tr: "Kalıcı bir iskelet hizmetkârı olan bir ölüm büyücüsü. Her tur dövüşen güvenilir bir dost isteyenler seçsin." },
         domain: { en: "Bone, marrow, structure, and the architecture of a body.", tr: "Kemik, ilik, yapı ve bir bedenin mimarisi." },
         ruleBreaker: {
-          name: { en: "Ossuary", tr: "Kemiklik" },
+          name: { en: "Bone Servant", tr: "Kemik Hizmetkâr" },
           text: {
             en: "You always have a servant: a skeleton with Level × 3 HP that acts on your turn. If it breaks, build another over any rest, out of whatever is lying around.", tr: "Her zaman bir hizmetkârın vardır: senin turunda oynayan Seviye × 3 Canlı bir iskelet. Kırılırsa, herhangi bir dinlenmede etraftaki neyse ondan bir yenisini yap.",
           },
@@ -1033,7 +1033,7 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A necromancer of long-lasting curses. Pick this to set curses that trigger later on conditions you choose.", tr: "Uzun süreli lanetlerin ölüm büyücüsü. Sonradan, seçtiğin koşullarda tetiklenen lanetler koymak için seç." },
         domain: { en: "Curses, hexes, slow rot, and consequences that arrive late.", tr: "Lanetler, büyüler, yavaş çürüme ve geç gelen sonuçlar." },
         ruleBreaker: {
-          name: { en: "It Keeps", tr: "Bekler" },
+          name: { en: "No Expiry", tr: "Süresiz" },
           text: {
             en: "Your curses have no duration. They last until their condition is met, and you set the condition when you cast them.", tr: "Lanetlerinin süresi yoktur. Koşulları yerine gelene kadar sürerler ve koşulu onları yaparken sen belirlersin.",
           },
@@ -1053,7 +1053,7 @@ export const CLASSES: CharClass[] = [
         ruleBreaker: {
           name: { en: "The Dead Speak Freely", tr: "Ölüler Serbestçe Konuşur" },
           text: {
-            en: "You see and speak with the dead at all times, at no cost. They see you too, and some of them have been waiting.", tr: "Ölüleri her zaman, hiçbir maliyet olmadan görür ve onlarla konuşursun. Onlar da seni görür ve bazıları bekliyordu.",
+            en: "You see and speak with the dead at all times, at no cost. They see you too.", tr: "Ölüleri her zaman, hiçbir maliyet olmadan görür ve onlarla konuşursun. Onlar da seni görür.",
           },
         },
         examples: [
@@ -1132,9 +1132,9 @@ export const CLASSES: CharClass[] = [
         tagline: { en: "A cleric of a dark god who trades pain for power. Pick this for fear, secrets, and sacrifice-based magic.", tr: "Güç için acı takas eden karanlık bir tanrının rahibi. Korku, sırlar ve kurban temelli büyü için seç." },
         domain: { en: "Fear, sacrifice, secrets, and the god whose name is not written down.", tr: "Korku, kurban, sırlar ve adı yazıya dökülmeyen tanrı." },
         ruleBreaker: {
-          name: { en: "Tithe", tr: "Öşür" },
+          name: { en: "Offering", tr: "Adak" },
           text: {
-            en: "Take HP from a willing or Downed creature to pay Energy, at 2 HP per Energy. Your god considers this normal.", tr: "Enerji ödemek için istekli ya da Düşmüş bir yaratıktan Can al, Enerji başına 2 Can. Tanrın bunu normal sayar.",
+            en: "Pay an Energy cost with HP instead: take 2 HP from a willing or Downed creature you touch for each 1 Energy. Your god finds this normal.", tr: "Bir Enerji bedelini Can ile öde: dokunduğun istekli ya da Düşmüş bir yaratıktan, her 1 Enerji için 2 Can al. Tanrın bunu normal karşılar.",
           },
         },
         examples: [

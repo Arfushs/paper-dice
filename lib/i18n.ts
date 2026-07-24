@@ -91,7 +91,7 @@ export const UI = {
 
   // group names
   "group.front": { en: "Front Line", tr: "Ön Saf" },
-  "group.skirmisher": { en: "Skirmishers", tr: "Çeviciler" },
+  "group.skirmisher": { en: "Skirmishers", tr: "Akıncılar" },
   "group.magic": { en: "The Four Magics", tr: "Dört Büyü" },
   "group.faith": { en: "Faith & Nature", tr: "İnanç ve Doğa" },
   "group.craft": { en: "Craft", tr: "Zanaat" },
